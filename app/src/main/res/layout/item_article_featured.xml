@@ -10,12 +10,12 @@
     app:cardElevation="0dp"
     app:strokeWidth="0dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.example.news.util.widget.NewsConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_featured_image"
+        <com.example.news.util.widget.NewsImageView
+            android:id="@+id/ivFeaturedImage"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:contentDescription="@string/article_image"
@@ -25,22 +25,22 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/image_placeholder" />
 
-        <TextView
-            android:id="@+id/tv_featured_news_site"
+        <com.example.news.util.widget.NewsTextView
+            android:id="@+id/tvFeaturedNewsSite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/tag_background"
-            android:textColor="@color/tag_text"
+            android:textColor="@color/white"
             android:textSize="11sp"
-            android:textStyle="bold"
+            app:newsFontFamily="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_featured_image"
+            app:layout_constraintTop_toBottomOf="@id/ivFeaturedImage"
             tools:text="SpaceNews" />
 
-        <TextView
-            android:id="@+id/tv_featured_title"
+        <com.example.news.util.widget.NewsTextView
+            android:id="@+id/tvFeaturedTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -49,14 +49,14 @@
             android:maxLines="2"
             android:textColor="@color/news_4E4B66"
             android:textSize="16sp"
-            android:textStyle="bold"
+            app:newsFontFamily="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_featured_news_site"
+            app:layout_constraintTop_toBottomOf="@id/tvFeaturedNewsSite"
             tools:text="Russian warship: Moskva sinks in Black Sea" />
 
-        <ImageView
-            android:id="@+id/iv_featured_source_icon"
+        <com.example.news.util.widget.NewsImageView
+            android:id="@+id/ivFeaturedSourceIcon"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="12dp"
@@ -66,45 +66,45 @@
             android:src="@drawable/ic_news"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_featured_title"
-            app:tint="@color/news_1877F2" />
+            app:layout_constraintTop_toBottomOf="@id/tvFeaturedTitle"
+            app:tint="@color/news_F98121" />
 
-        <TextView
-            android:id="@+id/tv_featured_source"
+        <com.example.news.util.widget.NewsTextView
+            android:id="@+id/tvFeaturedSource"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:textColor="@color/news_000000"
             android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/iv_featured_source_icon"
-            app:layout_constraintStart_toEndOf="@id/iv_featured_source_icon"
-            app:layout_constraintTop_toTopOf="@id/iv_featured_source_icon"
+            app:newsFontFamily="semiBold"
+            app:layout_constraintBottom_toBottomOf="@id/ivFeaturedSourceIcon"
+            app:layout_constraintStart_toEndOf="@id/ivFeaturedSourceIcon"
+            app:layout_constraintTop_toTopOf="@id/ivFeaturedSourceIcon"
             tools:text="BBC News" />
 
-        <ImageView
-            android:id="@+id/iv_featured_clock"
+        <com.example.news.util.widget.NewsImageView
+            android:id="@+id/ivFeaturedClock"
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_marginStart="12dp"
             android:contentDescription="@null"
             android:src="@drawable/ic_clock"
-            app:layout_constraintBottom_toBottomOf="@id/tv_featured_source"
-            app:layout_constraintStart_toEndOf="@id/tv_featured_source"
-            app:layout_constraintTop_toTopOf="@id/tv_featured_source" />
+            app:layout_constraintBottom_toBottomOf="@id/tvFeaturedSource"
+            app:layout_constraintStart_toEndOf="@id/tvFeaturedSource"
+            app:layout_constraintTop_toTopOf="@id/tvFeaturedSource" />
 
-        <TextView
-            android:id="@+id/tv_featured_date"
+        <com.example.news.util.widget.NewsTextView
+            android:id="@+id/tvFeaturedDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:textColor="@color/text_tertiary"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_featured_source"
-            app:layout_constraintStart_toEndOf="@id/iv_featured_clock"
-            app:layout_constraintTop_toTopOf="@id/tv_featured_source"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/tvFeaturedSource"
+            app:layout_constraintStart_toEndOf="@id/ivFeaturedClock"
+            app:layout_constraintTop_toTopOf="@id/tvFeaturedSource"
             tools:text="4h ago" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.example.news.util.widget.NewsConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

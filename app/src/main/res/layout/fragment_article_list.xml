@@ -40,6 +40,7 @@
         android:background="@drawable/bg_search_rounded"
         android:drawableEnd="@drawable/ic_search"
         android:gravity="center_vertical"
+        android:focusable="false"
         android:hint="@string/search_hint"
         android:textSize="@dimen/sp_12"
         android:paddingHorizontal="@dimen/dp_16"
@@ -49,8 +50,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNewsList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
         android:layout_marginTop="16dp"
         android:clipToPadding="false"
         android:overScrollMode="never"

@@ -8,7 +8,7 @@
     android:paddingVertical="10dp">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_small_image"
+        android:id="@+id/ivSmallImage"
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:contentDescription="@string/article_image"
@@ -19,21 +19,21 @@
         app:shapeAppearanceOverlay="@style/RoundedImageSmall"
         tools:src="@drawable/image_placeholder" />
 
-    <TextView
-        android:id="@+id/tv_small_news_site"
+    <com.example.news.util.widget.NewsTextView
+        android:id="@+id/tvSmallNewsSite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:background="@drawable/tag_background"
-        android:textColor="@color/tag_text"
-        android:textSize="10sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/iv_small_image"
-        app:layout_constraintTop_toTopOf="@id/iv_small_image"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_10"
+        app:newsFontFamily="bold"
+        app:layout_constraintStart_toEndOf="@id/ivSmallImage"
+        app:layout_constraintTop_toTopOf="@id/ivSmallImage"
         tools:text="SpaceNews" />
 
-    <TextView
-        android:id="@+id/tv_small_title"
+    <com.example.news.util.widget.NewsTextView
+        android:id="@+id/tvSmallTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -42,58 +42,58 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@color/news_4E4B66"
-        android:textSize="14sp"
-        android:textStyle="bold"
+        android:textSize="@dimen/sp_14"
+        app:newsFontFamily="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/iv_small_image"
-        app:layout_constraintTop_toBottomOf="@id/tv_small_news_site"
+        app:layout_constraintStart_toEndOf="@id/ivSmallImage"
+        app:layout_constraintTop_toBottomOf="@id/tvSmallNewsSite"
         tools:text="Ukraine's President Zelensky to BBC: Blood money being paid..." />
 
-    <ImageView
-        android:id="@+id/iv_small_source_icon"
+    <com.example.news.util.widget.NewsImageView
+        android:id="@+id/ivSmallSourceIcon"
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_marginStart="12dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_news"
-        app:layout_constraintBottom_toBottomOf="@id/iv_small_image"
-        app:layout_constraintStart_toEndOf="@id/iv_small_image"
-        app:tint="@color/news_1877F2" />
+        app:layout_constraintBottom_toBottomOf="@id/ivSmallImage"
+        app:layout_constraintStart_toEndOf="@id/ivSmallImage"
+        app:tint="@color/news_F98121" />
 
-    <TextView
-        android:id="@+id/tv_small_source"
+    <com.example.news.util.widget.NewsTextView
+        android:id="@+id/tvSmallSource"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:textColor="@color/news_000000"
         android:textSize="11sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/iv_small_source_icon"
-        app:layout_constraintStart_toEndOf="@id/iv_small_source_icon"
-        app:layout_constraintTop_toTopOf="@id/iv_small_source_icon"
+        app:newsFontFamily="semiBold"
+        app:layout_constraintBottom_toBottomOf="@id/ivSmallSourceIcon"
+        app:layout_constraintStart_toEndOf="@id/ivSmallSourceIcon"
+        app:layout_constraintTop_toTopOf="@id/ivSmallSourceIcon"
         tools:text="BBC News" />
 
-    <ImageView
-        android:id="@+id/iv_small_clock"
+    <com.example.news.util.widget.NewsImageView
+        android:id="@+id/ivSmallClock"
         android:layout_width="12dp"
         android:layout_height="12dp"
         android:layout_marginStart="8dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_clock"
-        app:layout_constraintBottom_toBottomOf="@id/tv_small_source"
-        app:layout_constraintStart_toEndOf="@id/tv_small_source"
-        app:layout_constraintTop_toTopOf="@id/tv_small_source" />
+        app:layout_constraintBottom_toBottomOf="@id/tvSmallSource"
+        app:layout_constraintStart_toEndOf="@id/tvSmallSource"
+        app:layout_constraintTop_toTopOf="@id/tvSmallSource" />
 
-    <TextView
-        android:id="@+id/tv_small_date"
+    <com.example.news.util.widget.NewsTextView
+        android:id="@+id/tvSmallDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:textColor="@color/text_tertiary"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_small_source"
-        app:layout_constraintStart_toEndOf="@id/iv_small_clock"
-        app:layout_constraintTop_toTopOf="@id/tv_small_source"
+        android:textSize="@dimen/sp_10"
+        app:layout_constraintBottom_toBottomOf="@id/tvSmallSource"
+        app:layout_constraintStart_toEndOf="@id/ivSmallClock"
+        app:layout_constraintTop_toTopOf="@id/tvSmallSource"
         tools:text="14m ago" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
