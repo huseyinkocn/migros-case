@@ -8,11 +8,11 @@
     tools:context=".ui.detail.ArticleDetailFragment">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scroll_view"
+        android:id="@+id/scroolView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:overScrollMode="never"
-        app:layout_constraintBottom_toTopOf="@id/bottom_bar"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,20 +22,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Top Bar overlaid on image -->
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/iv_detail_image"
+                <com.example.news.util.widget.NewsImageView
+                    android:id="@+id/ivDetailImage"
                     android:layout_width="match_parent"
                     android:layout_height="260dp"
                     android:contentDescription="@string/article_image"
                     android:scaleType="centerCrop"
                     tools:src="@drawable/image_placeholder" />
 
-                <!-- Back + More buttons overlay -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -45,7 +43,7 @@
                     android:paddingTop="8dp">
 
                     <ImageButton
-                        android:id="@+id/btn_back"
+                        android:id="@+id/btnBack"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
@@ -59,7 +57,7 @@
                         android:layout_weight="1" />
 
                     <ImageButton
-                        android:id="@+id/btn_more"
+                        android:id="@+id/btnMore"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
@@ -69,7 +67,6 @@
                 </LinearLayout>
             </FrameLayout>
 
-            <!-- News site info row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,13 +75,13 @@
                 android:paddingHorizontal="16dp"
                 android:paddingTop="16dp">
 
-                <ImageView
-                    android:id="@+id/iv_source_icon"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                <com.example.news.util.widget.NewsImageView
+                    android:id="@+id/ivSourceIcon"
+                    android:layout_width="@dimen/dp_24"
+                    android:layout_height="@dimen/dp_24"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_news"
-                    app:tint="@color/news_1877F2" />
+                    app:tint="@color/news_F98121" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -93,27 +90,26 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_detail_news_site"
+                    <com.example.news.util.widget.NewsTextView
+                        android:id="@+id/tvDetailNewsSite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/news_4E4B66"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
+                        android:textSize="@dimen/sp_14"
+                        app:newsFontFamily="semiBold"
                         tools:text="BBC News" />
 
-                    <TextView
-                        android:id="@+id/tv_detail_date"
+                    <com.example.news.util.widget.NewsTextView
+                        android:id="@+id/tvDetailDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:textColor="@color/text_tertiary"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/sp_12"
                         tools:text="14m ago" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/btn_following"
+                <com.example.news.util.widget.NewsTextView
+                    android:id="@+id/btnFollowing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/following_button_bg"
@@ -123,50 +119,46 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- News site tag -->
-            <TextView
-                android:id="@+id/tv_detail_tag"
+            <com.example.news.util.widget.NewsTextView
+                android:id="@+id/tvDetailTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
                 android:background="@drawable/tag_background"
-                android:textColor="@color/tag_text"
-                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12"
                 android:textStyle="bold"
                 tools:text="Space" />
 
-            <!-- Title -->
-            <TextView
-                android:id="@+id/tv_detail_title"
+            <com.example.news.util.widget.NewsTextView
+                android:id="@+id/tvDetailTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:paddingHorizontal="16dp"
+                android:layout_marginTop="@dimen/dp_12"
+                android:paddingHorizontal="@dimen/dp_16"
                 android:textColor="@color/news_4E4B66"
-                android:textSize="22sp"
-                android:textStyle="bold"
+                android:textSize="@dimen/sp_22"
+                app:newsFontFamily="bold"
                 tools:text="Ukraine's President Zelensky to BBC: Blood money being paid for Russian oil" />
 
-            <!-- Summary / Content -->
             <TextView
-                android:id="@+id/tv_detail_summary"
+                android:id="@+id/tvDetailSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/dp_16"
                 android:lineSpacingMultiplier="1.5"
                 android:paddingHorizontal="16dp"
                 android:paddingBottom="16dp"
                 android:textColor="@color/news_000000"
-                android:textSize="15sp"
+                android:textSize="@dimen/sp_14"
                 tools:text="Ukrainian President Volodymyr Zelensky has accused European countries that continue to buy Russian oil of earning their money in other people's blood." />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Bottom action bar: like, comment, bookmark -->
     <LinearLayout
-        android:id="@+id/bottom_bar"
+        android:id="@+id/bottomBar"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:background="@color/white"
@@ -179,7 +171,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/iv_like"
+            android:id="@+id/ivLike"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:contentDescription="@string/favorite"
@@ -187,30 +179,29 @@
             app:tint="@color/favorite_red" />
 
         <TextView
-            android:id="@+id/tv_like_count"
+            android:id="@+id/tvLikeCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:textColor="@color/news_000000"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_12"
             tools:text="24.5K" />
 
         <ImageView
-            android:id="@+id/iv_comment"
+            android:id="@+id/ivComment"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="24dp"
-            android:contentDescription="@null"
             android:src="@drawable/ic_comment"
             app:tint="@color/news_000000" />
 
         <TextView
-            android:id="@+id/tv_comment_count"
+            android:id="@+id/tvCommentCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:textColor="@color/news_000000"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_12"
             tools:text="1K" />
 
         <View
@@ -219,17 +210,16 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:id="@+id/iv_bookmark"
+            android:id="@+id/ivBookMark"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:contentDescription="@string/toggle_favorite"
             android:src="@drawable/ic_bookmark"
-            app:tint="@color/news_1877F2" />
+            app:tint="@color/favorite_red" />
     </LinearLayout>
 
-    <!-- Loading -->
     <ProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/news_1877F2"
@@ -239,9 +229,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Error -->
     <LinearLayout
-        android:id="@+id/error_layout"
+        android:id="@+id/errorLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -253,7 +242,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_error"
+            android:id="@+id/tvError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
@@ -262,7 +251,7 @@
             android:textSize="15sp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_retry"
+            android:id="@+id/btnRetry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

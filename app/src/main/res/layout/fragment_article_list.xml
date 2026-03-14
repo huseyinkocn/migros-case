@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@id/searchView" />
 
     <ProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/news_1877F2"
@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@id/searchView" />
 
     <LinearLayout
-        android:id="@+id/error_layout"
+        android:id="@+id/errorLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@id/searchView">
 
         <TextView
-            android:id="@+id/tv_error"
+            android:id="@+id/tvError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
@@ -96,7 +96,7 @@
             tools:text="Something went wrong" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_retry"
+            android:id="@+id/btnRetry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

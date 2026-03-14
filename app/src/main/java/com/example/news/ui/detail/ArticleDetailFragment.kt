@@ -60,7 +60,7 @@ class ArticleDetailFragment : Fragment() {
             viewModel.toggleFavorite()
         }
 
-        binding.ivBookmark.setOnClickListener {
+        binding.ivBookMark.setOnClickListener {
             viewModel.toggleFavorite()
         }
     }
@@ -72,14 +72,14 @@ class ArticleDetailFragment : Fragment() {
                     when (resource) {
                         is Resource.Loading -> {
                             binding.progressBar.visible()
-                            binding.scrollView.gone()
+                            binding.scroolView.gone()
                             binding.bottomBar.gone()
                             binding.errorLayout.gone()
                         }
                         is Resource.Success -> {
                             binding.progressBar.gone()
                             binding.errorLayout.gone()
-                            binding.scrollView.visible()
+                            binding.scroolView.visible()
                             binding.bottomBar.visible()
 
                             val article = resource.data
@@ -113,7 +113,7 @@ class ArticleDetailFragment : Fragment() {
                         }
                         is Resource.Error -> {
                             binding.progressBar.gone()
-                            binding.scrollView.gone()
+                            binding.scroolView.gone()
                             binding.bottomBar.gone()
                             binding.errorLayout.visible()
                             binding.tvError.text = resource.message
@@ -131,7 +131,7 @@ class ArticleDetailFragment : Fragment() {
                     binding.ivLike.setImageResource(
                         if (isFav) R.drawable.ic_favorite else R.drawable.ic_favorite_border
                     )
-                    binding.ivBookmark.setImageResource(
+                    binding.ivBookMark.setImageResource(
                         if (isFav) R.drawable.ic_bookmark else R.drawable.ic_bookmark_border
                     )
                 }
