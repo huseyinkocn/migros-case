@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="10dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_small_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:contentDescription="@string/article_image"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedImageSmall"
+        tools:src="@drawable/image_placeholder" />
+
+    <TextView
+        android:id="@+id/tv_small_news_site"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/tag_background"
+        android:textColor="@color/tag_text"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/iv_small_image"
+        app:layout_constraintTop_toTopOf="@id/iv_small_image"
+        tools:text="SpaceNews" />
+
+    <TextView
+        android:id="@+id/tv_small_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/news_4E4B66"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_small_image"
+        app:layout_constraintTop_toBottomOf="@id/tv_small_news_site"
+        tools:text="Ukraine's President Zelensky to BBC: Blood money being paid..." />
+
+    <ImageView
+        android:id="@+id/iv_small_source_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="12dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_news"
+        app:layout_constraintBottom_toBottomOf="@id/iv_small_image"
+        app:layout_constraintStart_toEndOf="@id/iv_small_image"
+        app:tint="@color/news_1877F2" />
+
+    <TextView
+        android:id="@+id/tv_small_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/news_000000"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/iv_small_source_icon"
+        app:layout_constraintStart_toEndOf="@id/iv_small_source_icon"
+        app:layout_constraintTop_toTopOf="@id/iv_small_source_icon"
+        tools:text="BBC News" />
+
+    <ImageView
+        android:id="@+id/iv_small_clock"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_clock"
+        app:layout_constraintBottom_toBottomOf="@id/tv_small_source"
+        app:layout_constraintStart_toEndOf="@id/tv_small_source"
+        app:layout_constraintTop_toTopOf="@id/tv_small_source" />
+
+    <TextView
+        android:id="@+id/tv_small_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:textColor="@color/text_tertiary"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_small_source"
+        app:layout_constraintStart_toEndOf="@id/iv_small_clock"
+        app:layout_constraintTop_toTopOf="@id/tv_small_source"
+        tools:text="14m ago" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

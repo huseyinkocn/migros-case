@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_featured_image"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:contentDescription="@string/article_image"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/image_placeholder" />
+
+        <TextView
+            android:id="@+id/tv_featured_news_site"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/tag_background"
+            android:textColor="@color/tag_text"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_featured_image"
+            tools:text="SpaceNews" />
+
+        <TextView
+            android:id="@+id/tv_featured_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/news_4E4B66"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_featured_news_site"
+            tools:text="Russian warship: Moskva sinks in Black Sea" />
+
+        <ImageView
+            android:id="@+id/iv_featured_source_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_news"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_featured_title"
+            app:tint="@color/news_1877F2" />
+
+        <TextView
+            android:id="@+id/tv_featured_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:textColor="@color/news_000000"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_featured_source_icon"
+            app:layout_constraintStart_toEndOf="@id/iv_featured_source_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_featured_source_icon"
+            tools:text="BBC News" />
+
+        <ImageView
+            android:id="@+id/iv_featured_clock"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="12dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_clock"
+            app:layout_constraintBottom_toBottomOf="@id/tv_featured_source"
+            app:layout_constraintStart_toEndOf="@id/tv_featured_source"
+            app:layout_constraintTop_toTopOf="@id/tv_featured_source" />
+
+        <TextView
+            android:id="@+id/tv_featured_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/text_tertiary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_featured_source"
+            app:layout_constraintStart_toEndOf="@id/iv_featured_clock"
+            app:layout_constraintTop_toTopOf="@id/tv_featured_source"
+            tools:text="4h ago" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

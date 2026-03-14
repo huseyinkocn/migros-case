@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="textPreview" format="string" />
+
+    <declare-styleable name="NewsTextStyle">
+        <attr name="newsFontFamily" format="enum">
+            <enum name="black" value="0" />
+            <enum name="blackItalic" value="1" />
+            <enum name="bold" value="2" />
+            <enum name="boldItalic" value="3" />
+            <enum name="extraBold" value="4" />
+            <enum name="extraBoldItalic" value="5" />
+            <enum name="extraLight" value="6" />
+            <enum name="extraLightItalic" value="7" />
+            <enum name="italic" value="8" />
+            <enum name="light" value="9" />
+            <enum name="lightItalic" value="10" />
+            <enum name="medium" value="11" />
+            <enum name="mediumItalic" value="12" />
+            <enum name="regular" value="13" />
+            <enum name="semiBold" value="14" />
+            <enum name="semiBoldItalic" value="15" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="NewsTextView">
+        <attr name="isCopyableText" format="boolean" />
+        <attr name="isUnderline" format="boolean" />
+        <attr name="isStrikeThruLine" format="boolean" />
+        <attr name="android:textColor" format="color" />
+        <attr name="android:textSize" format="float" />
+        <attr name="newsFontFamily" />
+    </declare-styleable>
+
+    <declare-styleable name="NewsConstraintLayout">
+    </declare-styleable>
+
+    <declare-styleable name="NewsImageView">
+    </declare-styleable>
+
+    <declare-styleable name="NewsEditText">
+        <attr name="newsFontFamily" />
+        <attr name="android:textColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CopyPasteEditText">
+        <attr name="newsFontFamily" />
+    </declare-styleable>
+
+    <declare-styleable name="NewsSearchView">
+        <attr name="newsFontFamily" />
+    </declare-styleable>
+
+    <declare-styleable name="NewsSwitch">
+        <attr name="newsFontFamily" />
+    </declare-styleable>
+
+    <declare-styleable name="NewsTextInputEditText">
+        <attr name="newsFontFamily" />
+    </declare-styleable>
+
+    <declare-styleable name="NewsRadioButton">
+        <attr name="newsFontFamily" />
+        <attr name="checkable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="NewsCheckBox">
+        <attr name="newsFontFamily" />
+        <attr name="checkable" />
+    </declare-styleable>
+
+    <declare-styleable name="HeaderComponentView">
+        <attr name="headerType" format="enum">
+            <enum name="def" value="0" />
+            <enum name="back" value="1" />
+            <enum name="close" value="2" />
+            <enum name="onlyClose" value="3" />
+            <enum name="search" value="4"/>
+            <enum name="new_back" value="5"/>
+            <enum name="new_search" value="6"/>
+            <enum name="combine" value="7"/>
+        </attr>
+        <attr name="textPreview" />
+    </declare-styleable>
+
+    <declare-styleable name="FooterComponentView">
+        <attr name="footerType" format="enum">
+            <enum name="none" value="0" />
+            <enum name="button" value="1" />
+        </attr>
+        <attr name="textPreview" />
+    </declare-styleable>
+
+    <declare-styleable name="NewsSpinnerView">
+        <attr name="newsFontFamily" />
+        <attr name="placeHolderPreview" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="NewsMultipleSelectionSpinnerView">
+        <attr name="hasAllOption" format="boolean" />
+        <attr name="newsFontFamily" />
+        <attr name="placeHolderPreview" />
+    </declare-styleable>
+
+    <declare-styleable name="BlackNewsSpinnerView">
+        <attr name="newsFontFamily" />
+        <attr name="placeHolderPreview" />
+    </declare-styleable>
+
+    <declare-styleable name="NewsMaterialButton">
+        <attr name="newsFontFamily" />
+        <attr name="newsButtonCornerRadius" format="dimension" />
+        <attr name="android:textAllCaps" format="boolean" />
+        <attr name="android:backgroundTint" format="color" />
+        <attr name="android:fontFamily" format="integer" />
+        <attr name="android:textSize" />
+        <attr name="newsButtonType" format="enum">
+            <enum name="primary" value="0" />
+            <enum name="stroke" value="1" />
+            <enum name="gray_stroke" value="2" />
+            <enum name="passive" value="3" />
+            <enum name="primary_green" value="4" />
+            <enum name="primary_red" value="5" />
+            <enum name="black_stroke" value="6" />
+            <enum name="red_stroke" value="7" />
+            <enum name="blue_stroke" value="8" />
+            <enum name="new_gray_stroke" value="9" />
+            <enum name="primary_gray" value="10" />
+            <enum name="primary_new_ui" value="11" />
+            <enum name="black_stroke_passive" value="12" />
+        </attr>
+        <attr name="newsStrokeWidth" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="NewsRecyclerView">
+        <attr name="itemTopMargin" format="dimension" />
+        <attr name="itemStartMargin" format="dimension" />
+        <attr name="itemEndMargin" format="dimension" />
+        <attr name="itemMargin" format="dimension" />
+        <attr name="itemDivider" format="dimension" />
+        <attr name="dividerMargin" format="dimension" />
+    </declare-styleable>
+
+</resources>

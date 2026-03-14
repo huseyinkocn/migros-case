@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Space Flight News</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_bookmark">Bookmark</string>
+    <string name="search_hint">Search</string>
+    <string name="trending">Trending</string>
+    <string name="latest">Latest</string>
+    <string name="see_all">See all</string>
+    <string name="retry">Retry</string>
+    <string name="favorite">Favorite</string>
+    <string name="unfavorite">Unfavorite</string>
+    <string name="share">Share</string>
+    <string name="following">Following</string>
+    <string name="read_full_article">Read Full Article</string>
+    <string name="article_image">Article image</string>
+    <string name="toggle_favorite">Toggle favorite</string>
+    <string name="no_bookmarks">You haven\'t bookmarked any articles yet</string>
+    <string name="error_generic">Something went wrong. Please try again.</string>
+    <string name="error_no_internet">No internet connection</string>
+</resources>

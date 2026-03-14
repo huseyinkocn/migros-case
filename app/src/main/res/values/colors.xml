@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="news_1877F2">#1877F2</color>
+    <color name="primary_dark">#FF1565C0</color>
+    <color name="primary_light">#FF42A5F5</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="background">#FFFFFFFF</color>
+    <color name="surface">#FFFFFFFF</color>
+    <color name="news_4E4B66">#4E4B66</color>
+    <color name="news_000000">#FF000000</color>
+    <color name="text_tertiary">#FFA0A3BD</color>
+    <color name="divider">#FFF0F0F0</color>
+    <color name="search_bg">#FFF5F5F5</color>
+    <color name="card_bg">#FFFFFFFF</color>
+    <color name="favorite_red">#FFE53935</color>
+    <color name="bottom_nav_inactive">#FFA0A3BD</color>
+    <color name="bottom_nav_active">#FF1877F2</color>
+    <color name="overlay_dark">#40000000</color>
+    <color name="tag_bg">#1A1877F2</color>
+    <color name="tag_text">#FF1877F2</color>
+    <color name="news_EAEAEA">#EAEAEA</color>
+</resources>

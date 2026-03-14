@@ -1,0 +1,151 @@
+package com.example.news.ui.adapter
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.news.R
+import com.example.news.databinding.ItemArticleFeaturedBinding
+import com.example.news.databinding.ItemArticleSmallBinding
+import com.example.news.databinding.ItemSectionHeaderBinding
+import com.example.news.domain.model.Article
+import com.example.news.util.toRelativeTime
+
+sealed class ArticleListItem {
+    data class SectionHeader(val title: String) : ArticleListItem()
+    data class FeaturedArticle(val article: Article) : ArticleListItem()
+    data class SmallArticle(val article: Article) : ArticleListItem()
+}
+
+class ArticleAdapter(
+    private val onItemClick: (Article) -> Unit,
+    private val onFavoriteClick: (Article) -> Unit
+) : ListAdapter<ArticleListItem, RecyclerView.ViewHolder>(ArticleListDiffCallback()) {
+
+    companion object {
+        private const val TYPE_HEADER = 0
+        private const val TYPE_FEATURED = 1
+        private const val TYPE_SMALL = 2
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is ArticleListItem.SectionHeader -> TYPE_HEADER
+            is ArticleListItem.FeaturedArticle -> TYPE_FEATURED
+            is ArticleListItem.SmallArticle -> TYPE_SMALL
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return when (viewType) {
+            TYPE_HEADER -> SectionHeaderViewHolder(
+                ItemSectionHeaderBinding.inflate(inflater, parent, false)
+            )
+            TYPE_FEATURED -> FeaturedViewHolder(
+                ItemArticleFeaturedBinding.inflate(inflater, parent, false)
+            )
+            TYPE_SMALL -> SmallViewHolder(
+                ItemArticleSmallBinding.inflate(inflater, parent, false)
+            )
+            else -> throw IllegalArgumentException("Unknown view type")
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (val item = getItem(position)) {
+            is ArticleListItem.SectionHeader -> (holder as SectionHeaderViewHolder).bind(item)
+            is ArticleListItem.FeaturedArticle -> (holder as FeaturedViewHolder).bind(item.article)
+            is ArticleListItem.SmallArticle -> (holder as SmallViewHolder).bind(item.article)
+        }
+    }
+
+    inner class SectionHeaderViewHolder(
+        private val binding: ItemSectionHeaderBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: ArticleListItem.SectionHeader) {
+            binding.tvSectionTitle.text = item.title
+        }
+    }
+
+    inner class FeaturedViewHolder(
+        private val binding: ItemArticleFeaturedBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            /*binding.root.setOnClickListener {
+                val pos = bindingAdapterPosition
+                if (pos != RecyclerView.NO_POSITION) {
+                    val item = getItem(pos) as? ArticleListItem.FeaturedArticle
+                    item?.let { onItemClick(it.article) }
+                }
+            }*/
+        }
+
+        fun bind(article: Article) {
+            binding.tvFeaturedTitle.text = article.title
+            binding.tvFeaturedNewsSite.text = article.newsSite
+            binding.tvFeaturedSource.text = article.newsSite
+            binding.tvFeaturedDate.text = article.publishedAt.toRelativeTime()
+
+            Glide.with(binding.ivFeaturedImage)
+                .load(article.imageUrl)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .placeholder(R.drawable.image_placeholder)
+                .error(R.drawable.image_placeholder)
+                .centerCrop()
+                .into(binding.ivFeaturedImage)
+        }
+    }
+
+    inner class SmallViewHolder(
+        private val binding: ItemArticleSmallBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            /*binding.root.setOnClickListener {
+                val pos = bindingAdapterPosition
+                if (pos != RecyclerView.NO_POSITION) {
+                    val item = getItem(pos) as? ArticleListItem.SmallArticle
+                    item?.let { onItemClick(it.article) }
+                }
+            }*/
+        }
+
+        fun bind(article: Article) {
+            binding.tvSmallTitle.text = article.title
+            binding.tvSmallNewsSite.text = article.newsSite
+            binding.tvSmallSource.text = article.newsSite
+            binding.tvSmallDate.text = article.publishedAt.toRelativeTime()
+
+            Glide.with(binding.ivSmallImage)
+                .load(article.imageUrl)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .placeholder(R.drawable.image_placeholder)
+                .error(R.drawable.image_placeholder)
+                .centerCrop()
+                .into(binding.ivSmallImage)
+        }
+    }
+
+    class ArticleListDiffCallback : DiffUtil.ItemCallback<ArticleListItem>() {
+        override fun areItemsTheSame(oldItem: ArticleListItem, newItem: ArticleListItem): Boolean {
+            return when {
+                oldItem is ArticleListItem.SectionHeader && newItem is ArticleListItem.SectionHeader ->
+                    oldItem.title == newItem.title
+                oldItem is ArticleListItem.FeaturedArticle && newItem is ArticleListItem.FeaturedArticle ->
+                    oldItem.article.id == newItem.article.id
+                oldItem is ArticleListItem.SmallArticle && newItem is ArticleListItem.SmallArticle ->
+                    oldItem.article.id == newItem.article.id
+                else -> false
+            }
+        }
+
+        override fun areContentsTheSame(oldItem: ArticleListItem, newItem: ArticleListItem): Boolean {
+            return oldItem == newItem
+        }
+    }
+}
