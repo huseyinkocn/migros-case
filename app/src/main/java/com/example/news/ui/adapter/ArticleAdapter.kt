@@ -12,24 +12,18 @@ import com.example.news.databinding.ItemArticleFeaturedBinding
 import com.example.news.databinding.ItemArticleSmallBinding
 import com.example.news.databinding.ItemSectionHeaderBinding
 import com.example.news.domain.model.Article
-import com.example.news.util.toRelativeTime
+import com.example.news.domain.model.ArticleListItem
+import com.example.news.util.extension.toRelativeTime
 
-sealed class ArticleListItem {
-    data class SectionHeader(val title: String) : ArticleListItem()
-    data class FeaturedArticle(val article: Article) : ArticleListItem()
-    data class SmallArticle(val article: Article) : ArticleListItem()
-}
+private const val TYPE_HEADER = 0
+private const val TYPE_FEATURED = 1
+private const val TYPE_SMALL = 2
 
 class ArticleAdapter(
     private val onItemClick: (Article) -> Unit,
     private val onFavoriteClick: (Article) -> Unit
 ) : ListAdapter<ArticleListItem, RecyclerView.ViewHolder>(ArticleListDiffCallback()) {
 
-    companion object {
-        private const val TYPE_HEADER = 0
-        private const val TYPE_FEATURED = 1
-        private const val TYPE_SMALL = 2
-    }
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {

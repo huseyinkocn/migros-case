@@ -16,11 +16,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.news.R
 import com.example.news.databinding.FragmentArticleListBinding
 import com.example.news.domain.model.Article
+import com.example.news.domain.model.ArticleListItem
 import com.example.news.ui.adapter.ArticleAdapter
-import com.example.news.ui.adapter.ArticleListItem
 import com.example.news.util.Resource
-import com.example.news.util.gone
-import com.example.news.util.visible
+import com.example.news.util.extension.gone
+import com.example.news.util.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -99,19 +99,22 @@ class ArticleListFragment : Fragment() {
                 viewModel.articles.collect { resource ->
                     when (resource) {
                         is Resource.Loading -> {
-                            binding.progressBar.visible()
+                            binding.lottieLoading.visible()
+                            binding.lottieLoading.playAnimation()
                             binding.rvNewsList.gone()
                             binding.errorLayout.gone()
                         }
                         is Resource.Success -> {
-                            binding.progressBar.gone()
+                            binding.lottieLoading.gone()
+                            binding.lottieLoading.cancelAnimation()
                             binding.errorLayout.gone()
                             binding.rvNewsList.visible()
                             val listItems = buildListItems(resource.data)
                             articleAdapter.submitList(listItems)
                         }
                         is Resource.Error -> {
-                            binding.progressBar.gone()
+                            binding.lottieLoading.gone()
+                            binding.lottieLoading.cancelAnimation()
                             binding.rvNewsList.gone()
                             binding.errorLayout.visible()
                             binding.tvError.text = resource.message

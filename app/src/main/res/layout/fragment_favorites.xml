@@ -7,24 +7,24 @@
     android:background="@color/background"
     tools:context=".ui.favorites.FavoritesFragment">
 
-    <TextView
-        android:id="@+id/tv_title"
+    <com.example.news.util.widget.NewsTextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_24"
         android:text="@string/menu_bookmark"
-        android:textColor="@color/news_4E4B66"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textColor="@color/news_000000"
+        android:textSize="@dimen/sp_18"
+        app:newsFontFamily="semiBold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="12dp"
+        android:id="@+id/rvFavoriteList"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        android:layout_marginTop="@dimen/dp_18"
         android:clipToPadding="false"
         android:overScrollMode="never"
         android:paddingBottom="8dp"
@@ -32,11 +32,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
         tools:listitem="@layout/item_article_small" />
 
     <LinearLayout
-        android:id="@+id/empty_layout"
+        android:id="@+id/emptyLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -45,23 +45,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title">
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:alpha="0.4"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_bookmark_border"
-            app:tint="@color/text_tertiary" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieEmpty"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/anim_empty" />
 
-        <TextView
+        <com.example.news.util.widget.NewsTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/dp_8"
             android:text="@string/no_bookmarks"
-            android:textColor="@color/news_000000"
-            android:textSize="15sp" />
+            android:textSize="@dimen/sp_14" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,84 +1,82 @@
 package com.example.news.ui.favorites
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.news.R
 import com.example.news.databinding.FragmentFavoritesBinding
+import com.example.news.domain.model.ArticleListItem
 import com.example.news.ui.adapter.ArticleAdapter
-import com.example.news.ui.adapter.ArticleListItem
-import com.example.news.util.gone
-import com.example.news.util.visible
+import com.example.news.ui.base.BaseFragment
+import com.example.news.util.extension.gone
+import com.example.news.util.extension.launchAndRepeatWithViewLifecycle
+import com.example.news.util.extension.viewBinding
+import com.example.news.util.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class FavoritesFragment : Fragment() {
-
-    private var _binding: FragmentFavoritesBinding? = null
-    private val binding get() = _binding!!
-
-    private val viewModel: FavoritesViewModel by viewModels()
+class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewModel>(
+    layoutResId = R.layout.fragment_favorites
+) {
+    override val binding: FragmentFavoritesBinding by viewBinding(FragmentFavoritesBinding::bind)
+    override val viewModel: FavoritesViewModel by viewModels()
 
     private lateinit var articleAdapter: ArticleAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
-        observeFavorites()
+        initRecyclerView()
+        observers()
     }
 
-    private fun setupRecyclerView() {
+    private fun initRecyclerView() {
         articleAdapter = ArticleAdapter(
             onItemClick = { article ->
-                val bundle = Bundle().apply {
-                    putInt("articleId", article.id)
-                }
-                findNavController().navigate(R.id.action_favorites_to_detail, bundle)
+                viewModel.onAction(FavoritesContract.FavoriteAction.onItemClick(article))
             },
             onFavoriteClick = { article ->
-                viewModel.toggleFavorite(article)
+                viewModel.onAction(FavoritesContract.FavoriteAction.onAddFavoriteClick(article))
             }
         )
-        binding.recyclerView.adapter = articleAdapter
+        binding.rvFavoriteList.adapter = articleAdapter
     }
 
-    private fun observeFavorites() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.favorites.collect { favorites ->
-                    val items = favorites.map { ArticleListItem.SmallArticle(it) }
+    private fun observers() {
+        launchAndRepeatWithViewLifecycle {
+            viewModel.viewState.collectLatest { viewState ->
+                binding.tvTitle.text = getString(viewState.headerTitleRes)
+            }
+        }
+
+        launchAndRepeatWithViewLifecycle {
+            viewModel.state.collectLatest { state ->
+                with(binding) {
+                    val items = state.favoriteList.map { ArticleListItem.SmallArticle(it) }
                     articleAdapter.submitList(items)
-                    if (favorites.isEmpty()) {
+                    if (state.favoriteList.isEmpty()) {
                         binding.emptyLayout.visible()
-                        binding.recyclerView.gone()
+                        binding.rvFavoriteList.gone()
                     } else {
                         binding.emptyLayout.gone()
-                        binding.recyclerView.visible()
+                        binding.rvFavoriteList.visible()
                     }
                 }
             }
         }
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        launchAndRepeatWithViewLifecycle {
+            viewModel.effect.collectLatest { effect ->
+                when (effect) {
+                    is FavoritesContract.FavoriteEffect.ItemClick -> {
+                        val bundle = Bundle().apply {
+                            putInt(ARTICLE_ID_KEY, effect.article.id)
+                        }
+                        findNavController().navigate(R.id.action_favorites_to_detail, bundle)
+                    }
+                }
+            }
+        }
     }
 }

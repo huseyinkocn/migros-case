@@ -17,9 +17,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.news.R
 import com.example.news.databinding.FragmentArticleDetailBinding
 import com.example.news.util.Resource
-import com.example.news.util.gone
-import com.example.news.util.toRelativeTime
-import com.example.news.util.visible
+import com.example.news.util.extension.gone
+import com.example.news.util.extension.toRelativeTime
+import com.example.news.util.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -71,13 +71,15 @@ class ArticleDetailFragment : Fragment() {
                 viewModel.article.collect { resource ->
                     when (resource) {
                         is Resource.Loading -> {
-                            binding.progressBar.visible()
+                            binding.lottieLoading.visible()
+                            binding.lottieLoading.playAnimation()
                             binding.scroolView.gone()
                             binding.bottomBar.gone()
                             binding.errorLayout.gone()
                         }
                         is Resource.Success -> {
-                            binding.progressBar.gone()
+                            binding.lottieLoading.gone()
+                            binding.lottieLoading.cancelAnimation()
                             binding.errorLayout.gone()
                             binding.scroolView.visible()
                             binding.bottomBar.visible()
@@ -112,7 +114,8 @@ class ArticleDetailFragment : Fragment() {
                             }
                         }
                         is Resource.Error -> {
-                            binding.progressBar.gone()
+                            binding.lottieLoading.gone()
+                            binding.lottieLoading.cancelAnimation()
                             binding.scroolView.gone()
                             binding.bottomBar.gone()
                             binding.errorLayout.visible()
