@@ -17,4 +17,5 @@
     <string name="no_bookmarks">You haven\'t bookmarked any articles yet</string>
     <string name="error_generic">Something went wrong. Please try again.</string>
     <string name="error_no_internet">No internet connection</string>
+    <string name="latest_news">LATEST NEWS</string>
 </resources>

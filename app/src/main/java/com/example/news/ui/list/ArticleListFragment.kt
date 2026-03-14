@@ -1,10 +1,12 @@
 package com.example.news.ui.list
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -61,22 +63,28 @@ class ArticleListFragment : Fragment() {
                 viewModel.toggleFavorite(article)
             }
         )
-        binding.recyclerView.adapter = articleAdapter
+        binding.rvNewsList.adapter = articleAdapter
     }
 
     private fun setupSearchView() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { viewModel.onSearchQueryChanged(it) }
-                binding.searchView.clearFocus()
-                return true
+        binding.searchView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.onSearchQueryChanged(s?.toString().orEmpty())
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.onSearchQueryChanged(newText.orEmpty())
-                return true
-            }
+            override fun afterTextChanged(s: Editable?) {}
         })
+
+        binding.searchView.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                binding.searchView.clearFocus()
+                true
+            } else {
+                false
+            }
+        }
     }
 
     private fun setupRetryButton() {
@@ -92,19 +100,19 @@ class ArticleListFragment : Fragment() {
                     when (resource) {
                         is Resource.Loading -> {
                             binding.progressBar.visible()
-                            binding.recyclerView.gone()
+                            binding.rvNewsList.gone()
                             binding.errorLayout.gone()
                         }
                         is Resource.Success -> {
                             binding.progressBar.gone()
                             binding.errorLayout.gone()
-                            binding.recyclerView.visible()
+                            binding.rvNewsList.visible()
                             val listItems = buildListItems(resource.data)
                             articleAdapter.submitList(listItems)
                         }
                         is Resource.Error -> {
                             binding.progressBar.gone()
-                            binding.recyclerView.gone()
+                            binding.rvNewsList.gone()
                             binding.errorLayout.visible()
                             binding.tvError.text = resource.message
                         }

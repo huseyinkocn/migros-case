@@ -8,42 +8,47 @@
     tools:context=".ui.list.ArticleListFragment">
 
     <com.example.news.util.widget.NewsTextView
-        android:id="@+id/tv_app_title"
+        android:id="@+id/tvAppTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_32"
+        android:background="@drawable/bg_appbar"
+        android:paddingHorizontal="@dimen/dp_8"
+        android:paddingVertical="@dimen/dp_4"
+        android:text="@string/latest_news"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:newsFontFamily="extraBold" />
+
+    <com.example.news.util.widget.NewsImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:src="@drawable/notification"
+        app:layout_constraintEnd_toEndOf="@+id/searchView"
+        app:layout_constraintTop_toTopOf="@+id/tvAppTitle" />
+
+    <com.example.news.util.widget.NewsEditText
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_16"
+        android:layout_height="@dimen/dp_32"
+        android:layout_marginTop="@dimen/dp_24"
         android:layout_marginHorizontal="@dimen/dp_16"
-        android:text="@string/app_name"
-        android:textColor="@color/news_1877F2"
-        android:textSize="@dimen/sp_20"
-        app:newsFontFamily="semiBold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.example.news.util.widget.NewsFrameLayout
-        android:id="@+id/search_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_search_rounded"
+        android:drawableEnd="@drawable/ic_search"
+        android:gravity="center_vertical"
+        android:hint="@string/search_hint"
+        android:textSize="@dimen/sp_12"
+        android:paddingHorizontal="@dimen/dp_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_app_title">
+        app:layout_constraintTop_toBottomOf="@id/tvAppTitle" />
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:background="@drawable/search_bg_rounded"
-            app:iconifiedByDefault="false"
-            app:queryHint="@string/search_hint"
-            app:searchIcon="@drawable/ic_search" />
-    </com.example.news.util.widget.NewsFrameLayout>
-
-    <!-- Content -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/rvNewsList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
@@ -54,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_container" />
+        app:layout_constraintTop_toBottomOf="@id/searchView" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -65,7 +70,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_container" />
+        app:layout_constraintTop_toBottomOf="@id/searchView" />
 
     <LinearLayout
         android:id="@+id/error_layout"
@@ -77,7 +82,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_container">
+        app:layout_constraintTop_toBottomOf="@id/searchView">
 
         <TextView
             android:id="@+id/tv_error"
