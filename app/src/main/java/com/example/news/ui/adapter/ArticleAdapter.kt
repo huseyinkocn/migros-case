@@ -76,13 +76,13 @@ class ArticleAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            /*binding.root.setOnClickListener {
-                val pos = bindingAdapterPosition
+            binding.root.setOnClickListener {
+                val pos = adapterPosition
                 if (pos != RecyclerView.NO_POSITION) {
                     val item = getItem(pos) as? ArticleListItem.FeaturedArticle
                     item?.let { onItemClick(it.article) }
                 }
-            }*/
+            }
         }
 
         fun bind(article: Article) {
@@ -106,13 +106,13 @@ class ArticleAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            /*binding.root.setOnClickListener {
-                val pos = bindingAdapterPosition
+            binding.root.setOnClickListener {
+                val pos = adapterPosition
                 if (pos != RecyclerView.NO_POSITION) {
                     val item = getItem(pos) as? ArticleListItem.SmallArticle
                     item?.let { onItemClick(it.article) }
                 }
-            }*/
+            }
         }
 
         fun bind(article: Article) {
