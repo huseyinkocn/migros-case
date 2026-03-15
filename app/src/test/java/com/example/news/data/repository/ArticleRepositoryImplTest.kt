@@ -6,6 +6,7 @@ import com.example.news.data.remote.api.SpaceflightApi
 import com.example.news.data.remote.dto.ArticleDto
 import com.example.news.data.remote.dto.ArticleResponseDto
 import com.example.news.domain.model.Article
+import com.example.news.domain.model.ArticleUiModel
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -100,7 +101,7 @@ class ArticleRepositoryImplTest {
     fun `toggleFavorite adds article when not favorite`() = runTest {
         coEvery { dao.isFavorite(1) } returns false
 
-        val article = Article(
+        val article = ArticleUiModel(
             id = 1, title = "Test", url = "https://example.com",
             imageUrl = "", newsSite = "", summary = "",
             publishedAt = "", updatedAt = ""
@@ -114,7 +115,7 @@ class ArticleRepositoryImplTest {
     fun `toggleFavorite removes article when already favorite`() = runTest {
         coEvery { dao.isFavorite(1) } returns true
 
-        val article = Article(
+        val article = ArticleUiModel(
             id = 1, title = "Test", url = "https://example.com",
             imageUrl = "", newsSite = "", summary = "",
             publishedAt = "", updatedAt = ""

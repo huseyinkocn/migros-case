@@ -1,14 +1,12 @@
 package com.example.news.ui.list
 
+
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.news.R
 import com.example.news.databinding.FragmentArticleListBinding
@@ -16,12 +14,14 @@ import com.example.news.domain.model.ArticleListItem
 import com.example.news.domain.model.ArticleUiModel
 import com.example.news.ui.adapter.ArticleAdapter
 import com.example.news.ui.base.BaseFragment
+import com.example.news.ui.favorites.ARTICLE_ID_KEY
 import com.example.news.util.Resource
 import com.example.news.util.extension.gone
+import com.example.news.util.extension.launchAndRepeatWithViewLifecycle
 import com.example.news.util.extension.viewBinding
 import com.example.news.util.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleListViewModel>(
@@ -36,28 +36,24 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
-        setupSearchView()
-        setupRetryButton()
-        observeArticles()
+        initRecyclerView()
+        initListeners()
+        observers()
     }
 
-    private fun setupRecyclerView() {
+    private fun initRecyclerView() {
         articleAdapter = ArticleAdapter(
             onItemClick = { article ->
-                val bundle = Bundle().apply {
-                    putInt("articleId", article.id)
-                }
-                findNavController().navigate(R.id.action_list_to_detail, bundle)
+                viewModel.onAction(ArticleListContract.ArticleListAction.onItemClick(article))
             },
             onFavoriteClick = { article ->
-                viewModel.toggleFavorite(article)
+                viewModel.onAction(ArticleListContract.ArticleListAction.onAddFavoriteClick(article))
             }
         )
         binding.rvNewsList.adapter = articleAdapter
     }
 
-    private fun setupSearchView() {
+    private fun initListeners() = with(binding) {
         binding.searchView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -76,40 +72,62 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
                 false
             }
         }
-    }
 
-    private fun setupRetryButton() {
         binding.btnRetry.setOnClickListener {
             viewModel.loadArticles()
         }
     }
 
-    private fun observeArticles() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.articles.collect { resource ->
-                    when (resource) {
+    private fun observers() {
+        launchAndRepeatWithViewLifecycle {
+            viewModel.viewState.collectLatest { viewState ->
+                with(binding) {
+                    btnRetry.text = getString(viewState.btnRetry)
+                    searchView.hint = getString(viewState.searchHint)
+                }
+            }
+        }
+
+        launchAndRepeatWithViewLifecycle {
+            viewModel.state.collectLatest { state ->
+                with(binding) {
+                    when (state.article) {
                         is Resource.Loading -> {
                             binding.lottieLoading.visible()
                             binding.lottieLoading.playAnimation()
                             binding.rvNewsList.gone()
                             binding.errorLayout.gone()
                         }
+
                         is Resource.Success -> {
                             binding.lottieLoading.gone()
                             binding.lottieLoading.cancelAnimation()
                             binding.errorLayout.gone()
                             binding.rvNewsList.visible()
-                            val listItems = buildListItems(resource.data)
+                            val listItems = buildListItems(state.article.data)
                             articleAdapter.submitList(listItems)
                         }
+
                         is Resource.Error -> {
                             binding.lottieLoading.gone()
                             binding.lottieLoading.cancelAnimation()
                             binding.rvNewsList.gone()
                             binding.errorLayout.visible()
-                            binding.tvError.text = resource.message
+                            binding.tvError.text = state.article.message
                         }
+                    }
+                }
+            }
+        }
+
+        launchAndRepeatWithViewLifecycle {
+            viewModel.effect.collectLatest { effect ->
+                when (effect) {
+                    is ArticleListContract.ArticleListEffect.ItemClick -> {
+                        val bundle = Bundle().apply {
+                            putInt(ARTICLE_ID_KEY, effect.article.id)
+                        }
+                        findNavController().navigate(R.id.action_list_to_detail, bundle)
                     }
                 }
             }

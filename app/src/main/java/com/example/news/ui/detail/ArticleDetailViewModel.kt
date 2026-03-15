@@ -32,6 +32,8 @@ class ArticleDetailViewModel @Inject constructor(
 ) : CoreViewModel() {
 
     private val articleId: Int = savedStateHandle.get<Int>(ARTICLE_ID_KEY) ?: -1
+
+
     private val _viewState = MutableStateFlow(ArticleDetailContract.ArticleDetailViewState)
     val viewState = _viewState.asStateFlow()
 

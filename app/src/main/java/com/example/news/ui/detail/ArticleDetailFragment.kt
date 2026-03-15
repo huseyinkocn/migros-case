@@ -11,12 +11,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.news.R
 import com.example.news.databinding.FragmentArticleDetailBinding
 import com.example.news.ui.base.BaseFragment
-import com.example.news.util.Resource
-import com.example.news.util.extension.gone
 import com.example.news.util.extension.launchAndRepeatWithViewLifecycle
 import com.example.news.util.extension.toRelativeTime
 import com.example.news.util.extension.viewBinding
-import com.example.news.util.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 

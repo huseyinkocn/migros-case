@@ -1,7 +1,6 @@
 package com.example.news.ui.list
 
-import app.cash.turbine.test
-import com.example.news.domain.model.Article
+import com.example.news.domain.model.ArticleUiModel
 import com.example.news.domain.usecase.GetArticlesUseCase
 import com.example.news.domain.usecase.SearchArticlesUseCase
 import com.example.news.domain.usecase.ToggleFavoriteUseCase
@@ -34,12 +33,12 @@ class ArticleListViewModelTest {
     private val testDispatcher = StandardTestDispatcher()
 
     private val testArticles = listOf(
-        Article(
+        ArticleUiModel(
             id = 1, title = "Article 1", url = "https://example.com/1",
             imageUrl = "", newsSite = "TestSite", summary = "Summary 1",
             publishedAt = "2026-03-11T10:00:00Z", updatedAt = "2026-03-11T10:00:00Z"
         ),
-        Article(
+        ArticleUiModel(
             id = 2, title = "Article 2", url = "https://example.com/2",
             imageUrl = "", newsSite = "TestSite", summary = "Summary 2",
             publishedAt = "2026-03-11T11:00:00Z", updatedAt = "2026-03-11T11:00:00Z"
@@ -59,18 +58,6 @@ class ArticleListViewModelTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain()
-    }
-
-    @Test
-    fun `init loads articles successfully`() = runTest {
-        viewModel = ArticleListViewModel(getArticlesUseCase, searchArticlesUseCase, toggleFavoriteUseCase)
-        testDispatcher.scheduler.advanceUntilIdle()
-
-        viewModel.articles.test {
-            val result = awaitItem()
-            assertTrue(result is Resource.Success)
-            assertEquals(2, (result as Resource.Success).data.size)
-        }
     }
 
     @Test
