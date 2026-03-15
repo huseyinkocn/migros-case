@@ -5,13 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.news.domain.usecase.GetArticleDetailUseCase
 import com.example.news.domain.usecase.ToggleFavoriteUseCase
 import com.example.news.ui.base.CoreViewModel
-import com.example.news.ui.favorites.FavoritesContract.FavoriteEffect.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,32 +26,23 @@ class ArticleDetailViewModel @Inject constructor(
     val viewState = _viewState.asStateFlow()
 
     private val _state = MutableStateFlow(ArticleDetailContract.ArticleDetailState())
-    val state = _state.onStart {
+    val state: StateFlow<ArticleDetailContract.ArticleDetailState> = _state.asStateFlow()
+
+    init {
         getArticleDetail(articleId)
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = _state.value
-    )
+    }
 
     private fun getArticleDetail(articleId: Int) {
-        viewModelScope.launch {
-            startLoading()
-            getArticleDetailUseCase(articleId).collect { article ->
-                stopLoading()
-                _state.update { state ->
-                    state.copy(article = article)
-                }
-            }
+        launchWithLoading {
+            val article = getArticleDetailUseCase(articleId)
+            _state.update { it.copy(article = article) }
         }
     }
 
-    fun toggleFavorite() {
+    private fun toggleFavorite() {
         viewModelScope.launch {
             toggleFavoriteUseCase(state.value.article)
-            _state.update { state ->
-                state.copy(article = state.article.copy(isFavorite = !state.article.isFavorite))
-            }
+            _state.update { it.copy(article = it.article.copy(isFavorite = !it.article.isFavorite)) }
         }
     }
 

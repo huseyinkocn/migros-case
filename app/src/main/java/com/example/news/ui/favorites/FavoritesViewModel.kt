@@ -8,11 +8,9 @@ import com.example.news.ui.base.CoreViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,18 +25,25 @@ class FavoritesViewModel @Inject constructor(
     val viewState = _viewState.asStateFlow()
 
     private val _state = MutableStateFlow(FavoritesContract.FavoriteState())
-    val state = _state.onStart {
-        getNotifications()
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = _state.value
-    )
+    val state: StateFlow<FavoritesContract.FavoriteState> = _state.asStateFlow()
 
     private val _effect = Channel<FavoritesContract.FavoriteEffect>()
     val effect = _effect.receiveAsFlow()
 
-    fun toggleFavorite(article: ArticleUiModel) {
+    init {
+        loadFavorites()
+    }
+
+    private fun loadFavorites() {
+        launchWithLoading {
+            getFavoritesUseCase().collect { favorites ->
+                stopLoading()
+                _state.update { it.copy(favoriteList = favorites) }
+            }
+        }
+    }
+
+    private fun toggleFavorite(article: ArticleUiModel) {
         viewModelScope.launch {
             toggleFavoriteUseCase(article)
         }
@@ -52,16 +57,6 @@ class FavoritesViewModel @Inject constructor(
 
             is FavoritesContract.FavoriteAction.onItemClick -> {
                 _effect.trySend(FavoritesContract.FavoriteEffect.ItemClick(action.article))
-            }
-        }
-    }
-
-    private fun getNotifications() {
-        viewModelScope.launch {
-            getFavoritesUseCase().collect { favorites ->
-                _state.update { state ->
-                    state.copy(favoriteList = favorites)
-                }
             }
         }
     }
