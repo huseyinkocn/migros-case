@@ -24,8 +24,8 @@
         app:newsFontFamily="extraBold" />
 
     <com.example.news.util.widget.NewsImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_16"
+        android:layout_height="@dimen/dp_16"
         android:layout_marginEnd="@dimen/dp_16"
         android:src="@drawable/notification"
         app:layout_constraintEnd_toEndOf="@+id/searchView"
@@ -34,7 +34,7 @@
     <com.example.news.util.widget.NewsEditText
         android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_32"
+        android:layout_height="@dimen/dp_40"
         android:layout_marginTop="@dimen/dp_24"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:background="@drawable/bg_search_rounded"
