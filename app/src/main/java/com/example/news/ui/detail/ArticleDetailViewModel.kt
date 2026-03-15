@@ -46,7 +46,9 @@ class ArticleDetailViewModel @Inject constructor(
 
     private fun getArticleDetail(articleId: Int) {
         viewModelScope.launch {
+            startLoading()
             getArticleDetailUseCase(articleId).collect { article ->
+                stopLoading()
                 _state.update { state ->
                     state.copy(article = article)
                 }
