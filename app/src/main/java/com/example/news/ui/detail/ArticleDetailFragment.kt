@@ -62,7 +62,6 @@ class ArticleDetailFragment : BaseFragment<FragmentArticleDetailBinding, Article
         launchAndRepeatWithViewLifecycle {
             viewModel.state.collectLatest { state ->
                 with(binding) {
-
                     binding.tvDetailTitle.text = state.article.title
                     binding.tvDetailSummary.text = state.article.summary
                     binding.tvDetailDate.text = state.article.publishedAt.toRelativeTime()

@@ -17,8 +17,6 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -34,14 +32,24 @@ class ArticleListViewModelTest {
 
     private val testArticles = listOf(
         ArticleUiModel(
-            id = 1, title = "Article 1", url = "https://example.com/1",
-            imageUrl = "", newsSite = "TestSite", summary = "Summary 1",
-            publishedAt = "2026-03-11T10:00:00Z", updatedAt = "2026-03-11T10:00:00Z"
+            id = 1,
+            title = "Article 1",
+            url = "https://example.com/1",
+            imageUrl = "",
+            newsSite = "TestSite",
+            summary = "Summary 1",
+            publishedAt = "2026-03-11T10:00:00Z",
+            updatedAt = "2026-03-11T10:00:00Z"
         ),
         ArticleUiModel(
-            id = 2, title = "Article 2", url = "https://example.com/2",
-            imageUrl = "", newsSite = "TestSite", summary = "Summary 2",
-            publishedAt = "2026-03-11T11:00:00Z", updatedAt = "2026-03-11T11:00:00Z"
+            id = 2,
+            title = "Article 2",
+            url = "https://example.com/2",
+            imageUrl = "",
+            newsSite = "TestSite",
+            summary = "Summary 2",
+            publishedAt = "2026-03-11T11:00:00Z",
+            updatedAt = "2026-03-11T11:00:00Z"
         )
     )
 

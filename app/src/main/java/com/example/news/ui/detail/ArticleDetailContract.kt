@@ -12,7 +12,7 @@ object ArticleDetailContract {
         val article: ArticleUiModel = ArticleUiModel(),
     )
 
-    data object ArticleDetailViewState{
+    data object ArticleDetailViewState {
         val following: Int = R.string.following
         val btnRetry: Int = R.string.retry
     }

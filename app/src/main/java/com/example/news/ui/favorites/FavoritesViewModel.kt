@@ -1,7 +1,6 @@
 package com.example.news.ui.favorites
 
 import androidx.lifecycle.viewModelScope
-import com.example.news.domain.model.Article
 import com.example.news.domain.model.ArticleUiModel
 import com.example.news.domain.usecase.GetFavoritesUseCase
 import com.example.news.domain.usecase.ToggleFavoriteUseCase

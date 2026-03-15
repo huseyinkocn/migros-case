@@ -38,7 +38,6 @@ class ArticleListViewModel @Inject constructor(
     private val _effect = Channel<ArticleListContract.ArticleListEffect>()
     val effect = _effect.receiveAsFlow()
 
-
     private val _viewState = MutableStateFlow(ArticleListContract.ArticleListViewState)
     val viewState = _viewState.asStateFlow()
 

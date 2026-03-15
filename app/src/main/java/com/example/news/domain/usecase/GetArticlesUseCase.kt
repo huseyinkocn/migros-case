@@ -1,6 +1,5 @@
 package com.example.news.domain.usecase
 
-import com.example.news.domain.model.Article
 import com.example.news.domain.model.ArticleUiModel
 import com.example.news.domain.repository.ArticleRepository
 import com.example.news.util.Resource

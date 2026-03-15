@@ -5,13 +5,12 @@ import com.example.news.data.local.entity.FavoriteArticleEntity
 import com.example.news.data.remote.api.SpaceflightApi
 import com.example.news.data.remote.dto.ArticleDto
 import com.example.news.data.remote.dto.ArticleResponseDto
-import com.example.news.domain.model.Article
 import com.example.news.domain.model.ArticleUiModel
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -58,7 +57,10 @@ class ArticleRepositoryImplTest {
     @Test
     fun `getArticles returns articles from API`() = runTest {
         val response = ArticleResponseDto(
-            count = 1, next = null, previous = null, results = listOf(testArticleDto)
+            count = 1,
+            next = null,
+            previous = null,
+            results = listOf(testArticleDto)
         )
         coEvery { api.getArticles(any(), any()) } returns response
         coEvery { dao.isFavorite(any()) } returns false
@@ -73,7 +75,10 @@ class ArticleRepositoryImplTest {
     @Test
     fun `getArticles marks favorite articles correctly`() = runTest {
         val response = ArticleResponseDto(
-            count = 1, next = null, previous = null, results = listOf(testArticleDto)
+            count = 1,
+            next = null,
+            previous = null,
+            results = listOf(testArticleDto)
         )
         coEvery { api.getArticles(any(), any()) } returns response
         coEvery { dao.isFavorite(1) } returns true
@@ -86,7 +91,10 @@ class ArticleRepositoryImplTest {
     @Test
     fun `searchArticles returns filtered results`() = runTest {
         val response = ArticleResponseDto(
-            count = 1, next = null, previous = null, results = listOf(testArticleDto)
+            count = 1,
+            next = null,
+            previous = null,
+            results = listOf(testArticleDto)
         )
         coEvery { api.searchArticles(any(), any(), any()) } returns response
         coEvery { dao.isFavorite(any()) } returns false
@@ -102,9 +110,14 @@ class ArticleRepositoryImplTest {
         coEvery { dao.isFavorite(1) } returns false
 
         val article = ArticleUiModel(
-            id = 1, title = "Test", url = "https://example.com",
-            imageUrl = "", newsSite = "", summary = "",
-            publishedAt = "", updatedAt = ""
+            id = 1,
+            title = "Test",
+            url = "https://example.com",
+            imageUrl = "",
+            newsSite = "",
+            summary = "",
+            publishedAt = "",
+            updatedAt = ""
         )
         repository.toggleFavorite(article)
 
@@ -116,9 +129,14 @@ class ArticleRepositoryImplTest {
         coEvery { dao.isFavorite(1) } returns true
 
         val article = ArticleUiModel(
-            id = 1, title = "Test", url = "https://example.com",
-            imageUrl = "", newsSite = "", summary = "",
-            publishedAt = "", updatedAt = ""
+            id = 1,
+            title = "Test",
+            url = "https://example.com",
+            imageUrl = "",
+            newsSite = "",
+            summary = "",
+            publishedAt = "",
+            updatedAt = ""
         )
         repository.toggleFavorite(article)
 

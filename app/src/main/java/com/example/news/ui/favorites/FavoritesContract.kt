@@ -1,7 +1,6 @@
 package com.example.news.ui.favorites
 
 import com.example.news.R
-import com.example.news.domain.model.Article
 import com.example.news.domain.model.ArticleUiModel
 import com.example.news.domain.model.FavoriteListUiModel
 
@@ -14,7 +13,7 @@ object FavoritesContract {
         val favoriteList: List<ArticleUiModel> = emptyList()
     )
 
-    data object FavoriteViewState{
+    data object FavoriteViewState {
         val headerTitleRes: Int = R.string.menu_bookmark
     }
 

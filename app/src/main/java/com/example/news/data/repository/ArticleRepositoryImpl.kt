@@ -4,7 +4,6 @@ import com.example.news.data.local.dao.ArticleDao
 import com.example.news.data.mapper.toDomain
 import com.example.news.data.mapper.toEntity
 import com.example.news.data.remote.api.SpaceflightApi
-import com.example.news.domain.model.Article
 import com.example.news.domain.model.ArticleUiModel
 import com.example.news.domain.repository.ArticleRepository
 import kotlinx.coroutines.flow.Flow

@@ -20,7 +20,6 @@ inline fun Fragment.launchAndRepeatWithViewLifecycle(
         }.onFailure {
             val message = this@launchAndRepeatWithViewLifecycle.tag.orEmpty()
             Log.e(message, it.message, it)
-
         }
     }
 }

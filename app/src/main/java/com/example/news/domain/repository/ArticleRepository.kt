@@ -1,6 +1,5 @@
 package com.example.news.domain.repository
 
-import com.example.news.domain.model.Article
 import com.example.news.domain.model.ArticleUiModel
 import kotlinx.coroutines.flow.Flow
 

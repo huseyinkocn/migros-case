@@ -2,22 +2,14 @@ package com.example.news.ui.detail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.example.news.domain.model.Article
-import com.example.news.domain.model.ArticleUiModel
-import com.example.news.domain.repository.ArticleRepository
 import com.example.news.domain.usecase.GetArticleDetailUseCase
 import com.example.news.domain.usecase.ToggleFavoriteUseCase
 import com.example.news.ui.base.CoreViewModel
-import com.example.news.ui.favorites.FavoritesContract
 import com.example.news.ui.favorites.FavoritesContract.FavoriteEffect.*
-import com.example.news.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -32,7 +24,6 @@ class ArticleDetailViewModel @Inject constructor(
 ) : CoreViewModel() {
 
     private val articleId: Int = savedStateHandle.get<Int>(ARTICLE_ID_KEY) ?: -1
-
 
     private val _viewState = MutableStateFlow(ArticleDetailContract.ArticleDetailViewState)
     val viewState = _viewState.asStateFlow()

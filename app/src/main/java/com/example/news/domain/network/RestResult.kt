@@ -1,6 +1,5 @@
 package com.example.news.domain.network
 
-
 sealed class RestResult<out T> {
 
     class Success<out T>(

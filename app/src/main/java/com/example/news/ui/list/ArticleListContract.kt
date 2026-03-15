@@ -10,7 +10,7 @@ object ArticleListContract {
         val article: Resource<List<ArticleUiModel>> = Resource.Loading,
     )
 
-    data object ArticleListViewState{
+    data object ArticleListViewState {
         val btnRetry: Int = R.string.retry
         val searchHint: Int = R.string.search_hint
     }

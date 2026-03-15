@@ -2,7 +2,6 @@ package com.example.news.data.mapper
 
 import com.example.news.data.local.entity.FavoriteArticleEntity
 import com.example.news.data.remote.dto.ArticleDto
-import com.example.news.domain.model.Article
 import com.example.news.domain.model.ArticleUiModel
 
 fun ArticleDto.toDomain(): ArticleUiModel {

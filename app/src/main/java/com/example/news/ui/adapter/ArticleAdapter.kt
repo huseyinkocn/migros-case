@@ -11,7 +11,6 @@ import com.example.news.R
 import com.example.news.databinding.ItemArticleFeaturedBinding
 import com.example.news.databinding.ItemArticleSmallBinding
 import com.example.news.databinding.ItemSectionHeaderBinding
-import com.example.news.domain.model.Article
 import com.example.news.domain.model.ArticleListItem
 import com.example.news.domain.model.ArticleUiModel
 import com.example.news.util.extension.toRelativeTime
@@ -24,7 +23,6 @@ class ArticleAdapter(
     private val onItemClick: (ArticleUiModel) -> Unit,
     private val onFavoriteClick: (ArticleUiModel) -> Unit
 ) : ListAdapter<ArticleListItem, RecyclerView.ViewHolder>(ArticleListDiffCallback()) {
-
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {

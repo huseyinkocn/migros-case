@@ -12,7 +12,7 @@ open class NewsTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = android.R.attr.textViewStyle
-) : MaterialTextView(context, attrs, defStyleAttr){
+) : MaterialTextView(context, attrs, defStyleAttr) {
 
     init {
         context.withStyledAttributes(attrs, R.styleable.NewsTextView) {
