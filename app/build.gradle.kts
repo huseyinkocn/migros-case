@@ -50,10 +50,12 @@ detekt {
     config.setFrom(files("${rootProject.projectDir}/detekt.yml"))
     buildUponDefaultConfig = true
     parallel = true
+    autoCorrect = true
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
     jvmTarget = "11"
+    autoCorrect = true
     reports {
         html.required.set(true)
         xml.required.set(true)
@@ -106,6 +108,9 @@ dependencies {
 
     // Lottie
     implementation(libs.lottie)
+
+    // Detekt
+    detektPlugins(libs.detekt.formatting)
 
     // Testing
     testImplementation(libs.junit)
