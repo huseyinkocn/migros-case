@@ -11,14 +11,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -42,24 +37,21 @@ class ArticleListViewModel @Inject constructor(
     val viewState = _viewState.asStateFlow()
 
     private val _state = MutableStateFlow(ArticleListContract.ArticleListState())
-    val state = _state.onStart {
+    val state: StateFlow<ArticleListContract.ArticleListState> = _state.asStateFlow()
+
+    init {
         loadArticles()
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = _state.value
-    )
+    }
 
     fun loadArticles() {
         val query = _searchQuery.value
-        if (query.isBlank()) {
-            getArticlesUseCase().onEach { result ->
-                _state.update { state ->
-                    state.copy(article = result)
-                }
-            }.launchIn(viewModelScope)
-        } else {
-            searchArticles(query)
+        launchWithLoading {
+            val articles = if (query.isBlank()) {
+                getArticlesUseCase()
+            } else {
+                searchArticlesUseCase(query)
+            }
+            _state.update { it.copy(article = articles) }
         }
     }
 
@@ -67,21 +59,9 @@ class ArticleListViewModel @Inject constructor(
         _searchQuery.value = query
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
-            delay(500)
-            if (query.isBlank()) {
-                loadArticles()
-            } else {
-                searchArticles(query)
-            }
+            delay(SEARCH_DEBOUNCE_MS)
+            loadArticles()
         }
-    }
-
-    private fun searchArticles(query: String) {
-        searchArticlesUseCase(query).onEach { result ->
-            _state.update { state ->
-                state.copy(article = result)
-            }
-        }.launchIn(viewModelScope)
     }
 
     fun onAction(action: ArticleListContract.ArticleListAction) {
@@ -96,10 +76,14 @@ class ArticleListViewModel @Inject constructor(
         }
     }
 
-    fun toggleFavorite(article: ArticleUiModel) {
+    private fun toggleFavorite(article: ArticleUiModel) {
         viewModelScope.launch {
             toggleFavoriteUseCase(article)
             loadArticles()
         }
+    }
+
+    companion object {
+        private const val SEARCH_DEBOUNCE_MS = 500L
     }
 }

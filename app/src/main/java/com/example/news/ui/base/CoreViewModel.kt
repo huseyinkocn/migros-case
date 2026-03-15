@@ -170,4 +170,29 @@ abstract class CoreViewModel : ViewModel() {
             NetworkState.Success(result, status)
         )
     }
+
+    protected fun launchWithLoading(
+        loadingType: LoadingType = LoadingType.Default,
+        errorType: ErrorType = ErrorType.Content,
+        block: suspend () -> Unit
+    ) {
+        viewModelScope.launch {
+            if (loadingType != LoadingType.None) startLoading()
+            try {
+                block()
+            } catch (exception: Exception) {
+                if (errorType != ErrorType.None) {
+                    val error = object : INetworkError {
+                        override var message: String? = exception.message
+                        override var data: JsonElement? = null
+                        override var code: Int? = null
+                        override var externalCode: String? = null
+                    }
+                    onServiceError(error)
+                }
+            } finally {
+                if (loadingType != LoadingType.None) stopLoading()
+            }
+        }
+    }
 }

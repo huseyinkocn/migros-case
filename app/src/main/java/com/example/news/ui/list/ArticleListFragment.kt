@@ -14,11 +14,8 @@ import com.example.news.domain.model.ArticleUiModel
 import com.example.news.ui.adapter.ArticleAdapter
 import com.example.news.ui.base.BaseFragment
 import com.example.news.ui.favorites.ARTICLE_ID_KEY
-import com.example.news.util.Resource
-import com.example.news.util.extension.gone
 import com.example.news.util.extension.launchAndRepeatWithViewLifecycle
 import com.example.news.util.extension.viewBinding
-import com.example.news.util.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -89,12 +86,8 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
 
         launchAndRepeatWithViewLifecycle {
             viewModel.state.collectLatest { state ->
-                with(binding) {
-                    binding.errorLayout.gone()
-                    binding.rvNewsList.visible()
-                    val listItems = buildListItems(state.article)
-                    articleAdapter.submitList(listItems)
-                }
+                val listItems = buildListItems(state.article)
+                articleAdapter.submitList(listItems)
             }
         }
 
