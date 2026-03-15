@@ -3,6 +3,7 @@ package com.example.news.ui.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.news.domain.model.Article
+import com.example.news.domain.model.ArticleUiModel
 import com.example.news.domain.usecase.GetArticlesUseCase
 import com.example.news.domain.usecase.SearchArticlesUseCase
 import com.example.news.domain.usecase.ToggleFavoriteUseCase
@@ -25,8 +26,8 @@ class ArticleListViewModel @Inject constructor(
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
-    private val _articles = MutableStateFlow<Resource<List<Article>>>(Resource.Loading)
-    val articles: StateFlow<Resource<List<Article>>> = _articles.asStateFlow()
+    private val _articles = MutableStateFlow<Resource<List<ArticleUiModel>>>(Resource.Loading)
+    val articles: StateFlow<Resource<List<ArticleUiModel>>> = _articles.asStateFlow()
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
@@ -67,7 +68,7 @@ class ArticleListViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun toggleFavorite(article: Article) {
+    fun toggleFavorite(article: ArticleUiModel) {
         viewModelScope.launch {
             toggleFavoriteUseCase(article)
             loadArticles()

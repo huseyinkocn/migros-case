@@ -17,6 +17,7 @@ import com.example.news.R
 import com.example.news.databinding.FragmentArticleListBinding
 import com.example.news.domain.model.Article
 import com.example.news.domain.model.ArticleListItem
+import com.example.news.domain.model.ArticleUiModel
 import com.example.news.ui.adapter.ArticleAdapter
 import com.example.news.util.Resource
 import com.example.news.util.extension.gone
@@ -125,7 +126,7 @@ class ArticleListFragment : Fragment() {
         }
     }
 
-    private fun buildListItems(articles: List<Article>): List<ArticleListItem> {
+    private fun buildListItems(articles: List<ArticleUiModel>): List<ArticleListItem> {
         if (articles.isEmpty()) return emptyList()
 
         val items = mutableListOf<ArticleListItem>()

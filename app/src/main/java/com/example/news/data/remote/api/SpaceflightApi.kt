@@ -1,5 +1,6 @@
 package com.example.news.data.remote.api
 
+import com.example.news.data.remote.dto.ArticleDto
 import com.example.news.data.remote.dto.ArticleResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,7 +17,7 @@ interface SpaceflightApi {
     @GET("articles/{id}/")
     suspend fun getArticleById(
         @Path("id") id: Int
-    ): com.example.news.data.remote.dto.ArticleDto
+    ): ArticleDto
 
     @GET("articles/")
     suspend fun searchArticles(

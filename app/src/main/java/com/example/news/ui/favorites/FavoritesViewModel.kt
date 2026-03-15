@@ -2,6 +2,7 @@ package com.example.news.ui.favorites
 
 import androidx.lifecycle.viewModelScope
 import com.example.news.domain.model.Article
+import com.example.news.domain.model.ArticleUiModel
 import com.example.news.domain.usecase.GetFavoritesUseCase
 import com.example.news.domain.usecase.ToggleFavoriteUseCase
 import com.example.news.ui.base.CoreViewModel
@@ -38,7 +39,7 @@ class FavoritesViewModel @Inject constructor(
     private val _effect = Channel<FavoritesContract.FavoriteEffect>()
     val effect = _effect.receiveAsFlow()
 
-    fun toggleFavorite(article: Article) {
+    fun toggleFavorite(article: ArticleUiModel) {
         viewModelScope.launch {
             toggleFavoriteUseCase(article)
         }

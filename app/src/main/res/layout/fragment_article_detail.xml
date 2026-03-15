@@ -113,10 +113,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/following_button_bg"
-                    android:text="@string/following"
                     android:textColor="@color/white"
                     android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="@string/following"/>
             </LinearLayout>
 
             <com.example.news.util.widget.NewsTextView
@@ -266,8 +266,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/retry"
-            app:backgroundTint="@color/news_1877F2" />
+            tools:text="@string/retry"
+            app:backgroundTint="@color/news_F98121" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

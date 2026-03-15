@@ -13,6 +13,7 @@ import com.example.news.databinding.ItemArticleSmallBinding
 import com.example.news.databinding.ItemSectionHeaderBinding
 import com.example.news.domain.model.Article
 import com.example.news.domain.model.ArticleListItem
+import com.example.news.domain.model.ArticleUiModel
 import com.example.news.util.extension.toRelativeTime
 
 private const val TYPE_HEADER = 0
@@ -20,8 +21,8 @@ private const val TYPE_FEATURED = 1
 private const val TYPE_SMALL = 2
 
 class ArticleAdapter(
-    private val onItemClick: (Article) -> Unit,
-    private val onFavoriteClick: (Article) -> Unit
+    private val onItemClick: (ArticleUiModel) -> Unit,
+    private val onFavoriteClick: (ArticleUiModel) -> Unit
 ) : ListAdapter<ArticleListItem, RecyclerView.ViewHolder>(ArticleListDiffCallback()) {
 
 
@@ -79,7 +80,7 @@ class ArticleAdapter(
             }
         }
 
-        fun bind(article: Article) {
+        fun bind(article: ArticleUiModel) {
             binding.tvFeaturedTitle.text = article.title
             binding.tvFeaturedNewsSite.text = article.newsSite
             binding.tvFeaturedSource.text = article.newsSite
@@ -109,7 +110,7 @@ class ArticleAdapter(
             }
         }
 
-        fun bind(article: Article) {
+        fun bind(article: ArticleUiModel) {
             binding.tvSmallTitle.text = article.title
             binding.tvSmallNewsSite.text = article.newsSite
             binding.tvSmallSource.text = article.newsSite
