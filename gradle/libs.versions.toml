@@ -23,6 +23,7 @@ coroutinesTest = "1.9.0"
 archCoreTesting = "2.2.0"
 logcat = "0.4"
 lottie = "6.6.2"
+detekt = "1.23.8"
 constraintlayout = "2.2.0"
 swiperefreshlayout = "1.1.0"
 
@@ -88,3 +89,4 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
