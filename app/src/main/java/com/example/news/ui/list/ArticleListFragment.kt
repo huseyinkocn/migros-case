@@ -7,6 +7,8 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.news.R
 import com.example.news.databinding.FragmentArticleListBinding
 import com.example.news.domain.model.ArticleListItem
@@ -46,7 +48,13 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
                 viewModel.onAction(ArticleListContract.ArticleListAction.onAddFavoriteClick(article))
             }
         )
-        binding.rvNewsList.adapter = articleAdapter
+
+        binding.rvNewsList.apply {
+            adapter = articleAdapter
+            setHasFixedSize(true)
+            setItemViewCacheSize(ITEM_VIEW_CACHE_SIZE)
+            addOnScrollListener(glideScrollListener())
+        }
     }
 
     private fun initListeners() = with(binding) {
@@ -105,6 +113,16 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
         }
     }
 
+    private fun glideScrollListener() = object : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            when (newState) {
+                RecyclerView.SCROLL_STATE_DRAGGING,
+                RecyclerView.SCROLL_STATE_SETTLING -> Glide.with(this@ArticleListFragment).pauseRequests()
+                RecyclerView.SCROLL_STATE_IDLE -> Glide.with(this@ArticleListFragment).resumeRequests()
+            }
+        }
+    }
+
     private fun buildListItems(articles: List<ArticleUiModel>): List<ArticleListItem> {
         if (articles.isEmpty()) return emptyList()
 
@@ -121,5 +139,9 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
         }
 
         return items
+    }
+
+    companion object {
+        private const val ITEM_VIEW_CACHE_SIZE = 10
     }
 }

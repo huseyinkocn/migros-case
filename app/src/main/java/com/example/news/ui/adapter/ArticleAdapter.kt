@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.example.news.R
 import com.example.news.databinding.ItemArticleFeaturedBinding
 import com.example.news.databinding.ItemArticleSmallBinding
@@ -86,10 +88,7 @@ class ArticleAdapter(
 
             Glide.with(binding.ivFeaturedImage)
                 .load(article.imageUrl)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .placeholder(R.drawable.image_placeholder)
-                .error(R.drawable.image_placeholder)
-                .centerCrop()
+                .transition(DrawableTransitionOptions.withCrossFade(CROSSFADE_DURATION))
                 .into(binding.ivFeaturedImage)
         }
     }
@@ -116,12 +115,20 @@ class ArticleAdapter(
 
             Glide.with(binding.ivSmallImage)
                 .load(article.imageUrl)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .placeholder(R.drawable.image_placeholder)
-                .error(R.drawable.image_placeholder)
-                .centerCrop()
+                .apply(smallRequestOptions)
+                .transition(DrawableTransitionOptions.withCrossFade(CROSSFADE_DURATION))
                 .into(binding.ivSmallImage)
         }
+    }
+
+    companion object {
+        private const val CROSSFADE_DURATION = 150
+        private const val SMALL_IMAGE_SIZE = 288
+        private val smallRequestOptions = RequestOptions()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .error(R.drawable.image_placeholder)
+            .centerCrop()
+            .override(SMALL_IMAGE_SIZE)
     }
 
     class ArticleListDiffCallback : DiffUtil.ItemCallback<ArticleListItem>() {

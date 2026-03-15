@@ -101,6 +101,7 @@ dependencies {
 
     // Glide
     implementation(libs.glide)
+    implementation(libs.glide.okhttp3)
     ksp(libs.glide.compiler)
 
     // Logcat
