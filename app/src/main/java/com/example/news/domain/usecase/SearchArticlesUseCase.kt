@@ -10,13 +10,12 @@ import javax.inject.Inject
 class SearchArticlesUseCase @Inject constructor(
     private val repository: ArticleRepository
 ) {
-    operator fun invoke(query: String, limit: Int = 20, offset: Int = 0): Flow<Resource<List<ArticleUiModel>>> = flow {
-        emit(Resource.Loading)
+    operator fun invoke(query: String, limit: Int = 20, offset: Int = 0): Flow<List<ArticleUiModel>> = flow {
         try {
             val articles = repository.searchArticles(query, limit, offset)
-            emit(Resource.Success(articles))
+            emit(articles)
         } catch (e: Exception) {
-            emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
+                //
         }
     }
 }

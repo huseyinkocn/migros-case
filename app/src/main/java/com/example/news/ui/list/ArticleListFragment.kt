@@ -90,31 +90,10 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
         launchAndRepeatWithViewLifecycle {
             viewModel.state.collectLatest { state ->
                 with(binding) {
-                    when (state.article) {
-                        is Resource.Loading -> {
-                            binding.lottieLoading.visible()
-                            binding.lottieLoading.playAnimation()
-                            binding.rvNewsList.gone()
-                            binding.errorLayout.gone()
-                        }
-
-                        is Resource.Success -> {
-                            binding.lottieLoading.gone()
-                            binding.lottieLoading.cancelAnimation()
-                            binding.errorLayout.gone()
-                            binding.rvNewsList.visible()
-                            val listItems = buildListItems(state.article.data)
-                            articleAdapter.submitList(listItems)
-                        }
-
-                        is Resource.Error -> {
-                            binding.lottieLoading.gone()
-                            binding.lottieLoading.cancelAnimation()
-                            binding.rvNewsList.gone()
-                            binding.errorLayout.visible()
-                            binding.tvError.text = state.article.message
-                        }
-                    }
+                    binding.errorLayout.gone()
+                    binding.rvNewsList.visible()
+                    val listItems = buildListItems(state.article)
+                    articleAdapter.submitList(listItems)
                 }
             }
         }

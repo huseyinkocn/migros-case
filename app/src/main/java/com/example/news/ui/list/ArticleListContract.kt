@@ -7,7 +7,7 @@ import com.example.news.util.Resource
 object ArticleListContract {
 
     data class ArticleListState(
-        val article: Resource<List<ArticleUiModel>> = Resource.Loading,
+        val article: List<ArticleUiModel> = emptyList()
     )
 
     data object ArticleListViewState {
