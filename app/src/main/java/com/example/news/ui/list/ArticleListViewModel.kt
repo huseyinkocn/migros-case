@@ -7,6 +7,7 @@ import com.example.news.domain.model.ArticleUiModel
 import com.example.news.domain.usecase.GetArticlesUseCase
 import com.example.news.domain.usecase.SearchArticlesUseCase
 import com.example.news.domain.usecase.ToggleFavoriteUseCase
+import com.example.news.ui.base.CoreViewModel
 import com.example.news.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -24,7 +25,7 @@ class ArticleListViewModel @Inject constructor(
     private val getArticlesUseCase: GetArticlesUseCase,
     private val searchArticlesUseCase: SearchArticlesUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
-) : ViewModel() {
+) : CoreViewModel() {
 
     private val _articles = MutableStateFlow<Resource<List<ArticleUiModel>>>(Resource.Loading)
     val articles: StateFlow<Resource<List<ArticleUiModel>>> = _articles.asStateFlow()

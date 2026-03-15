@@ -40,7 +40,6 @@
         android:background="@drawable/bg_search_rounded"
         android:drawableEnd="@drawable/ic_search"
         android:gravity="center_vertical"
-        android:focusable="false"
         android:hint="@string/search_hint"
         android:textSize="@dimen/sp_12"
         android:paddingHorizontal="@dimen/dp_16"

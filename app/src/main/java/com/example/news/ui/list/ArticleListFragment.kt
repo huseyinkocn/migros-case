@@ -3,11 +3,8 @@ package com.example.news.ui.list
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,34 +12,27 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.news.R
 import com.example.news.databinding.FragmentArticleListBinding
-import com.example.news.domain.model.Article
 import com.example.news.domain.model.ArticleListItem
 import com.example.news.domain.model.ArticleUiModel
 import com.example.news.ui.adapter.ArticleAdapter
+import com.example.news.ui.base.BaseFragment
 import com.example.news.util.Resource
 import com.example.news.util.extension.gone
+import com.example.news.util.extension.viewBinding
 import com.example.news.util.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ArticleListFragment : Fragment() {
+class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleListViewModel>(
+    layoutResId = R.layout.fragment_article_list
+) {
 
-    private var _binding: FragmentArticleListBinding? = null
-    private val binding get() = _binding!!
+    override val binding: FragmentArticleListBinding by viewBinding(FragmentArticleListBinding::bind)
 
-    private val viewModel: ArticleListViewModel by viewModels()
+    override val viewModel: ArticleListViewModel by viewModels()
 
     private lateinit var articleAdapter: ArticleAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentArticleListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -142,10 +132,5 @@ class ArticleListFragment : Fragment() {
         }
 
         return items
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
