@@ -84,6 +84,6 @@ class ArticleListViewModel @Inject constructor(
     }
 
     companion object {
-        private const val SEARCH_DEBOUNCE_MS = 500L
+        private const val SEARCH_DEBOUNCE_MS = 750L
     }
 }
