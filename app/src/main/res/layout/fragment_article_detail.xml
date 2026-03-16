@@ -24,7 +24,8 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16">
 
                 <com.example.news.util.widget.NewsImageView
                     android:id="@+id/ivDetailImage"
@@ -159,13 +160,13 @@
 
     <LinearLayout
         android:id="@+id/bottomBar"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_64"
         android:background="@color/white"
         android:elevation="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
+        android:paddingHorizontal="@dimen/dp_32"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

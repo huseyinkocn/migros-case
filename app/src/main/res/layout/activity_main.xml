@@ -10,6 +10,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="@dimen/dp_0"
         android:layout_height="@dimen/dp_0"
+        android:paddingTop="@dimen/dp_32"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
