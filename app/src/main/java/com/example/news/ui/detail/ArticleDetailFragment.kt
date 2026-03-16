@@ -6,14 +6,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.news.R
 import com.example.news.databinding.FragmentArticleDetailBinding
 import com.example.news.ui.base.BaseFragment
 import com.example.news.util.extension.launchAndRepeatWithViewLifecycle
 import com.example.news.util.extension.toRelativeTime
 import com.example.news.util.extension.viewBinding
+import com.example.news.util.image.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -68,13 +67,7 @@ class ArticleDetailFragment : BaseFragment<FragmentArticleDetailBinding, Article
                     binding.tvDetailNewsSite.text = state.article.newsSite
                     binding.tvDetailTag.text = state.article.newsSite
 
-                    Glide.with(this@ArticleDetailFragment)
-                        .load(state.article.imageUrl)
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .placeholder(R.drawable.image_placeholder)
-                        .error(R.drawable.image_placeholder)
-                        .centerCrop()
-                        .into(binding.ivDetailImage)
+                    ImageLoader.load(binding.ivDetailImage, state.article.imageUrl)
 
                     binding.btnMore.setOnClickListener {
                         val shareIntent = Intent(Intent.ACTION_SEND).apply {

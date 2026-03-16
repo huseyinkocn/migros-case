@@ -5,17 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
-import com.example.news.R
 import com.example.news.databinding.ItemArticleFeaturedBinding
 import com.example.news.databinding.ItemArticleSmallBinding
 import com.example.news.databinding.ItemSectionHeaderBinding
 import com.example.news.domain.model.ArticleListItem
 import com.example.news.domain.model.ArticleUiModel
 import com.example.news.util.extension.toRelativeTime
+import com.example.news.util.image.ImageLoader
 
 private const val TYPE_HEADER = 0
 private const val TYPE_FEATURED = 1
@@ -85,10 +81,7 @@ class ArticleAdapter(
             binding.tvFeaturedSource.text = article.newsSite
             binding.tvFeaturedDate.text = article.publishedAt.toRelativeTime()
 
-            Glide.with(binding.ivFeaturedImage)
-                .load(article.imageUrl)
-                .transition(DrawableTransitionOptions.withCrossFade(CROSSFADE_DURATION))
-                .into(binding.ivFeaturedImage)
+            ImageLoader.load(binding.ivFeaturedImage, article.imageUrl)
         }
     }
 
@@ -112,22 +105,8 @@ class ArticleAdapter(
             binding.tvSmallSource.text = article.newsSite
             binding.tvSmallDate.text = article.publishedAt.toRelativeTime()
 
-            Glide.with(binding.ivSmallImage)
-                .load(article.imageUrl)
-                .apply(smallRequestOptions)
-                .transition(DrawableTransitionOptions.withCrossFade(CROSSFADE_DURATION))
-                .into(binding.ivSmallImage)
+            ImageLoader.loadThumbnail(binding.ivSmallImage, article.imageUrl)
         }
-    }
-
-    companion object {
-        private const val CROSSFADE_DURATION = 150
-        private const val SMALL_IMAGE_SIZE = 288
-        private val smallRequestOptions = RequestOptions()
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .error(R.drawable.image_placeholder)
-            .centerCrop()
-            .override(SMALL_IMAGE_SIZE)
     }
 
     class ArticleListDiffCallback : DiffUtil.ItemCallback<ArticleListItem>() {

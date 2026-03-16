@@ -7,8 +7,6 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.news.R
 import com.example.news.databinding.FragmentArticleListBinding
 import com.example.news.domain.model.ArticleListItem
@@ -18,6 +16,7 @@ import com.example.news.ui.base.BaseFragment
 import com.example.news.ui.favorites.ARTICLE_ID_KEY
 import com.example.news.util.extension.launchAndRepeatWithViewLifecycle
 import com.example.news.util.extension.viewBinding
+import com.example.news.util.image.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -50,7 +49,7 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
             adapter = articleAdapter
             setHasFixedSize(true)
             setItemViewCacheSize(ITEM_VIEW_CACHE_SIZE)
-            addOnScrollListener(glideScrollListener())
+            addOnScrollListener(ImageLoader.createScrollPauseListener(this@ArticleListFragment))
         }
     }
 
@@ -106,16 +105,6 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
                         findNavController().navigate(R.id.action_list_to_detail, bundle)
                     }
                 }
-            }
-        }
-    }
-
-    private fun glideScrollListener() = object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            when (newState) {
-                RecyclerView.SCROLL_STATE_DRAGGING,
-                RecyclerView.SCROLL_STATE_SETTLING -> Glide.with(this@ArticleListFragment).pauseRequests()
-                RecyclerView.SCROLL_STATE_IDLE -> Glide.with(this@ArticleListFragment).resumeRequests()
             }
         }
     }
