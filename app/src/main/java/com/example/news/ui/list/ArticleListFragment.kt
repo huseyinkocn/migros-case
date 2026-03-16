@@ -21,6 +21,8 @@ import com.example.news.util.image.ImageLoader.ITEM_VIEW_CACHE_SIZE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
+private const val PREFETCH_COUNT = 4
+
 @AndroidEntryPoint
 class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleListViewModel>(
     layoutResId = R.layout.fragment_article_list
@@ -50,6 +52,8 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
             adapter = articleAdapter
             setHasFixedSize(true)
             setItemViewCacheSize(ITEM_VIEW_CACHE_SIZE)
+            (layoutManager as? androidx.recyclerview.widget.LinearLayoutManager)
+                ?.initialPrefetchItemCount = PREFETCH_COUNT
             addOnScrollListener(ImageLoader.createScrollPauseListener(this@ArticleListFragment))
         }
     }
@@ -92,7 +96,9 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
         launchAndRepeatWithViewLifecycle {
             viewModel.state.collectLatest { state ->
                 val listItems = buildListItems(state.article)
-                articleAdapter.submitList(listItems)
+                articleAdapter.submitList(listItems) {
+                    preloadVisibleImages()
+                }
             }
         }
 
@@ -107,6 +113,13 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
                     }
                 }
             }
+        }
+    }
+
+    private fun preloadVisibleImages() {
+        val urls = articleAdapter.getImageUrls()
+        if (urls.isNotEmpty()) {
+            ImageLoader.preloadImages(requireContext(), urls)
         }
     }
 

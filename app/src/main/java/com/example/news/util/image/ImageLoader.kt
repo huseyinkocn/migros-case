@@ -1,5 +1,6 @@
 package com.example.news.util.image
 
+import android.content.Context
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -13,11 +14,13 @@ object ImageLoader {
 
     private const val CROSSFADE_DURATION = 150
     private const val THUMBNAIL_SIZE = 288
+    private const val THUMBNAIL_FACTOR = 0.25f
 
     const val ITEM_VIEW_CACHE_SIZE = 10
 
     private val defaultOptions = RequestOptions()
         .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .error(R.drawable.image_placeholder)
 
     private val thumbnailOptions = defaultOptions.clone()
         .centerCrop()
@@ -27,6 +30,7 @@ object ImageLoader {
         Glide.with(imageView)
             .load(url)
             .apply(defaultOptions)
+            .thumbnail(THUMBNAIL_FACTOR)
             .transition(DrawableTransitionOptions.withCrossFade(CROSSFADE_DURATION))
             .centerCrop()
             .into(imageView)
@@ -36,8 +40,18 @@ object ImageLoader {
         Glide.with(imageView)
             .load(url)
             .apply(thumbnailOptions)
+            .thumbnail(THUMBNAIL_FACTOR)
             .transition(DrawableTransitionOptions.withCrossFade(CROSSFADE_DURATION))
             .into(imageView)
+    }
+
+    fun preloadImages(context: Context, urls: List<String?>) {
+        urls.filterNotNull().forEach { url ->
+            Glide.with(context)
+                .load(url)
+                .apply(thumbnailOptions)
+                .preload()
+        }
     }
 
     fun createScrollPauseListener(fragment: Fragment) = object : RecyclerView.OnScrollListener() {

@@ -53,6 +53,15 @@ class ArticleAdapter(
         }
     }
 
+    fun getImageUrls(): List<String> {
+        return (0 until itemCount).mapNotNull { position ->
+            when (val item = getItem(position)) {
+                is ArticleListItem.SmallArticle -> item.article.imageUrl
+                else -> null
+            }
+        }
+    }
+
     inner class SectionHeaderViewHolder(
         private val binding: ItemSectionHeaderBinding
     ) : RecyclerView.ViewHolder(binding.root) {
