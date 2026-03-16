@@ -37,15 +37,15 @@ class ArticleDetailFragment : BaseFragment<FragmentArticleDetailBinding, Article
         }
 
         binding.btnRetry.setOnClickListener {
-            viewModel.onAction(ArticleDetailContract.ArticleDetailAction.onLoadArticle)
+            viewModel.onAction(ArticleDetailContract.ArticleDetailAction.OnLoadArticle)
         }
 
         binding.ivLike.setOnClickListener {
-            viewModel.onAction(ArticleDetailContract.ArticleDetailAction.onFavoriteClick)
+            viewModel.onAction(ArticleDetailContract.ArticleDetailAction.OnFavoriteClick)
         }
 
         binding.ivBookMark.setOnClickListener {
-            viewModel.onAction(ArticleDetailContract.ArticleDetailAction.onFavoriteClick)
+            viewModel.onAction(ArticleDetailContract.ArticleDetailAction.OnFavoriteClick)
         }
     }
 

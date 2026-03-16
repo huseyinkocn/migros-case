@@ -48,10 +48,10 @@ class ArticleDetailViewModel @Inject constructor(
 
     fun onAction(action: ArticleDetailContract.ArticleDetailAction) {
         when (action) {
-            ArticleDetailContract.ArticleDetailAction.onLoadArticle -> {
+            ArticleDetailContract.ArticleDetailAction.OnLoadArticle -> {
                 getArticleDetail(articleId)
             }
-            is ArticleDetailContract.ArticleDetailAction.onFavoriteClick -> {
+            is ArticleDetailContract.ArticleDetailAction.OnFavoriteClick -> {
                 toggleFavorite()
             }
         }

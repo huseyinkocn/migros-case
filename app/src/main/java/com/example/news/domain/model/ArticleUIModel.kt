@@ -12,7 +12,6 @@ data class ArticleUiModel(
     val newsSite: String = "",
     val summary: String = "",
     val publishedAt: String = "",
-    val displayDate: String = "",
     val isFavorite: Boolean = false,
     val updatedAt: String = "",
 ) : Parcelable

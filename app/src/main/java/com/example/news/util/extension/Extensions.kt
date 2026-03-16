@@ -7,18 +7,6 @@ import java.util.Locale
 import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 
-fun String.toFormattedDate(): String {
-    return try {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-        inputFormat.timeZone = TimeZone.getTimeZone("UTC")
-        val outputFormat = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
-        val date = inputFormat.parse(this)
-        date?.let { outputFormat.format(it) } ?: this
-    } catch (e: Exception) {
-        this
-    }
-}
-
 fun String.toRelativeTime(): String {
     return try {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
@@ -52,8 +40,4 @@ fun View.visible() {
 
 fun View.gone() {
     visibility = View.GONE
-}
-
-fun View.invisible() {
-    visibility = View.INVISIBLE
 }

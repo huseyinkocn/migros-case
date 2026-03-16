@@ -2,7 +2,6 @@ package com.example.news.ui.list
 
 import com.example.news.R
 import com.example.news.domain.model.ArticleUiModel
-import com.example.news.util.Resource
 
 object ArticleListContract {
 

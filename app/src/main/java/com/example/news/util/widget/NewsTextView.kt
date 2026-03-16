@@ -1,7 +1,6 @@
 package com.example.news.util.widget
 
 import android.content.Context
-import android.graphics.Paint
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
@@ -26,22 +25,5 @@ open class NewsTextView @JvmOverloads constructor(
         }
 
         obtainTypeface(attrs)
-    }
-
-    private fun setAsCopyable() {
-        setTextColor(ContextCompat.getColor(context, NewsColor.black))
-        setAsUnderline()
-    }
-
-    private fun setAsUnderline() {
-        paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG
-    }
-
-    private fun removeUnderline() {
-        paintFlags = paintFlags and Paint.UNDERLINE_TEXT_FLAG.inv()
-    }
-
-    private fun setAsStrikeThruLine() {
-        paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
     }
 }

@@ -4,14 +4,11 @@ import com.example.news.domain.model.ArticleUiModel
 import com.example.news.domain.usecase.GetArticlesUseCase
 import com.example.news.domain.usecase.SearchArticlesUseCase
 import com.example.news.domain.usecase.ToggleFavoriteUseCase
-import com.example.news.util.Resource
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
@@ -60,7 +57,7 @@ class ArticleListViewModelTest {
         searchArticlesUseCase = mockk()
         toggleFavoriteUseCase = mockk()
 
-        every { getArticlesUseCase(any(), any()) } returns flowOf(Resource.Success(testArticles))
+        coEvery { getArticlesUseCase(any(), any()) } returns testArticles
     }
 
     @After
@@ -71,12 +68,12 @@ class ArticleListViewModelTest {
     @Test
     fun `toggleFavorite calls use case`() = runTest {
         coEvery { toggleFavoriteUseCase(any()) } returns Unit
-        every { getArticlesUseCase(any(), any()) } returns flowOf(Resource.Success(testArticles))
+        coEvery { getArticlesUseCase(any(), any()) } returns testArticles
 
         viewModel = ArticleListViewModel(getArticlesUseCase, searchArticlesUseCase, toggleFavoriteUseCase)
         testDispatcher.scheduler.advanceUntilIdle()
 
-        viewModel.toggleFavorite(testArticles[0])
+        viewModel.onAction(ArticleListContract.ArticleListAction.onAddFavoriteClick(testArticles[0]))
         testDispatcher.scheduler.advanceUntilIdle()
 
         coVerify { toggleFavoriteUseCase(testArticles[0]) }

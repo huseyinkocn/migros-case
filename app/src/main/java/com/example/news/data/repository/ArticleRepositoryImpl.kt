@@ -49,8 +49,4 @@ class ArticleRepositoryImpl @Inject constructor(
             entities.map { it.toDomain() }
         }
     }
-
-    override fun isFavorite(articleId: Int): Flow<Boolean> {
-        return dao.isFavoriteFlow(articleId)
-    }
 }

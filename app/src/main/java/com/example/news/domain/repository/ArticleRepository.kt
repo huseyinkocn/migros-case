@@ -14,6 +14,4 @@ interface ArticleRepository {
     suspend fun toggleFavorite(article: ArticleUiModel)
 
     fun getFavorites(): Flow<List<ArticleUiModel>>
-
-    fun isFavorite(articleId: Int): Flow<Boolean>
 }
