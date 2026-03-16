@@ -7,6 +7,11 @@ import java.util.Locale
 import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 
+const val TIME_NOW = 1L
+const val TIME_AGO = 60L
+const val TIME_HOURS = 24L
+const val TIME_DAYS = 7L
+
 fun String.toRelativeTime(): String {
     return try {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
@@ -20,10 +25,10 @@ fun String.toRelativeTime(): String {
         val days = TimeUnit.MILLISECONDS.toDays(diffMs)
 
         when {
-            minutes < 1 -> "Just now"
-            minutes < 60 -> "${minutes}m ago"
-            hours < 24 -> "${hours}h ago"
-            days < 7 -> "${days}d ago"
+            minutes < TIME_NOW -> "Just now"
+            minutes < TIME_AGO -> "${minutes}m ago"
+            hours < TIME_HOURS -> "${hours}h ago"
+            days < TIME_DAYS -> "${days}d ago"
             else -> {
                 val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
                 outputFormat.format(date)

@@ -15,8 +15,7 @@ object ArticleListContract {
     }
 
     sealed interface ArticleListAction {
-        data class onAddFavoriteClick(val article: ArticleUiModel) : ArticleListAction
-        data class onItemClick(val article: ArticleUiModel) : ArticleListAction
+        data class OnItemClick(val article: ArticleUiModel) : ArticleListAction
     }
 
     sealed interface ArticleListEffect {

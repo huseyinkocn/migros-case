@@ -22,8 +22,7 @@ private const val TYPE_FEATURED = 1
 private const val TYPE_SMALL = 2
 
 class ArticleAdapter(
-    private val onItemClick: (ArticleUiModel) -> Unit,
-    private val onFavoriteClick: (ArticleUiModel) -> Unit
+    private val onItemClick: (ArticleUiModel) -> Unit
 ) : ListAdapter<ArticleListItem, RecyclerView.ViewHolder>(ArticleListDiffCallback()) {
 
     override fun getItemViewType(position: Int): Int {

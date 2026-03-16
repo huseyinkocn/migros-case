@@ -16,8 +16,7 @@ object FavoritesContract {
     }
 
     sealed interface FavoriteAction {
-        data class onAddFavoriteClick(val article: ArticleUiModel) : FavoriteAction
-        data class onItemClick(val article: ArticleUiModel) : FavoriteAction
+        data class OnItemClick(val article: ArticleUiModel) : FavoriteAction
     }
 
     sealed interface FavoriteEffect {

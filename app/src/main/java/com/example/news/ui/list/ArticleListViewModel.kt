@@ -1,10 +1,8 @@
 package com.example.news.ui.list
 
 import androidx.lifecycle.viewModelScope
-import com.example.news.domain.model.ArticleUiModel
 import com.example.news.domain.usecase.GetArticlesUseCase
 import com.example.news.domain.usecase.SearchArticlesUseCase
-import com.example.news.domain.usecase.ToggleFavoriteUseCase
 import com.example.news.ui.base.CoreViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -21,8 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ArticleListViewModel @Inject constructor(
     private val getArticlesUseCase: GetArticlesUseCase,
-    private val searchArticlesUseCase: SearchArticlesUseCase,
-    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
+    private val searchArticlesUseCase: SearchArticlesUseCase
 ) : CoreViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
@@ -66,20 +63,9 @@ class ArticleListViewModel @Inject constructor(
 
     fun onAction(action: ArticleListContract.ArticleListAction) {
         when (action) {
-            is ArticleListContract.ArticleListAction.onAddFavoriteClick -> {
-                toggleFavorite(action.article)
-            }
-
-            is ArticleListContract.ArticleListAction.onItemClick -> {
+            is ArticleListContract.ArticleListAction.OnItemClick -> {
                 _effect.trySend(ArticleListContract.ArticleListEffect.ItemClick(action.article))
             }
-        }
-    }
-
-    private fun toggleFavorite(article: ArticleUiModel) {
-        viewModelScope.launch {
-            toggleFavoriteUseCase(article)
-            loadArticles()
         }
     }
 

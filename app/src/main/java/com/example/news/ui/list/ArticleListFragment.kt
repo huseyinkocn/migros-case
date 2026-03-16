@@ -42,10 +42,7 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
     private fun initRecyclerView() {
         articleAdapter = ArticleAdapter(
             onItemClick = { article ->
-                viewModel.onAction(ArticleListContract.ArticleListAction.onItemClick(article))
-            },
-            onFavoriteClick = { article ->
-                viewModel.onAction(ArticleListContract.ArticleListAction.onAddFavoriteClick(article))
+                viewModel.onAction(ArticleListContract.ArticleListAction.OnItemClick(article))
             }
         )
 

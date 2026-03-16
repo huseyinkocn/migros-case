@@ -34,10 +34,7 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
     private fun initRecyclerView() {
         articleAdapter = ArticleAdapter(
             onItemClick = { article ->
-                viewModel.onAction(FavoritesContract.FavoriteAction.onItemClick(article))
-            },
-            onFavoriteClick = { article ->
-                viewModel.onAction(FavoritesContract.FavoriteAction.onAddFavoriteClick(article))
+                viewModel.onAction(FavoritesContract.FavoriteAction.OnItemClick(article))
             }
         )
         binding.rvFavoriteList.adapter = articleAdapter
