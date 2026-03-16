@@ -17,6 +17,7 @@ import com.example.news.ui.favorites.ARTICLE_ID_KEY
 import com.example.news.util.extension.launchAndRepeatWithViewLifecycle
 import com.example.news.util.extension.viewBinding
 import com.example.news.util.image.ImageLoader
+import com.example.news.util.image.ImageLoader.ITEM_VIEW_CACHE_SIZE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -125,9 +126,5 @@ class ArticleListFragment : BaseFragment<FragmentArticleListBinding, ArticleList
         }
 
         return items
-    }
-
-    companion object {
-        private const val ITEM_VIEW_CACHE_SIZE = 10
     }
 }

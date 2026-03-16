@@ -14,6 +14,8 @@ object ImageLoader {
     private const val CROSSFADE_DURATION = 150
     private const val THUMBNAIL_SIZE = 288
 
+    const val ITEM_VIEW_CACHE_SIZE = 10
+
     private val defaultOptions = RequestOptions()
         .diskCacheStrategy(DiskCacheStrategy.ALL)
 
