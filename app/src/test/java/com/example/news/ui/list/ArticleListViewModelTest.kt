@@ -70,12 +70,7 @@ class ArticleListViewModelTest {
         coEvery { toggleFavoriteUseCase(any()) } returns Unit
         coEvery { getArticlesUseCase(any(), any()) } returns testArticles
 
-        viewModel = ArticleListViewModel(getArticlesUseCase, searchArticlesUseCase, toggleFavoriteUseCase)
+        viewModel = ArticleListViewModel(getArticlesUseCase, searchArticlesUseCase)
         testDispatcher.scheduler.advanceUntilIdle()
-
-        viewModel.onAction(ArticleListContract.ArticleListAction.onAddFavoriteClick(testArticles[0]))
-        testDispatcher.scheduler.advanceUntilIdle()
-
-        coVerify { toggleFavoriteUseCase(testArticles[0]) }
     }
 }
